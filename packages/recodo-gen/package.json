@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "Generate docs from React Component comment and markdown files",
   "main": "index.js",
+  "bin": {
+    "recodo-gen": "cli.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
