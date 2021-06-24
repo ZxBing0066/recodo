@@ -1,0 +1,28 @@
+{
+  "name": "recodo-compiler",
+  "version": "0.0.1",
+  "description": "Live editor and preview for React demo",
+  "main": "dist/main.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZxBing0066/recodo.git"
+  },
+  "author": "ZxBing0066",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ZxBing0066/recodo/issues"
+  },
+  "homepage": "https://github.com/ZxBing0066/recodo#readme",
+  "dependencies": {
+    "acorn": "^8.4.0",
+    "acorn-dynamic-import": "^4.0.0",
+    "acorn-jsx": "^5.3.1",
+    "magic-string": "^0.25.7",
+    "regexpu-core": "^4.7.1"
+  },
+  "devDependencies": {
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "private": "true",
+  "name": "recodo",
+  "version": "0.0.1",
+  "description": "Component docs system for React",
+  "main": "index.js",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:compiler": "webpack serve --config packages/recodo-compiler/webpack.config.js",
+    "build:compiler": "ENV=production webpack --config packages/recodo-compiler/webpack.config.js",
+    "build:compiler:analyzer": "ANALYZER=true npm run build:compiler",
+    "dev:live": "webpack serve --config packages/recodo-live/webpack.config.js",
+    "build:live": "ENV=production webpack --config packages/recodo-live/webpack.config.js",
+    "build:live:analyzer": "ANALYZER=true npm run build:live",
+    "dev:doc": "webpack serve --config packages/recodo-doc/webpack.config.js",
+    "build:doc:lib": "babel --config-file './.babelrc' packages/recodo-doc/src/ --extensions '.js,.jsx,.ts,.tsx' -d packages/recodo-doc/lib/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZxBing0066/recodo.git"
+  },
+  "keywords": [
+    "React",
+    "docs",
+    "documentation",
+    "styleguide"
+  ],
+  "author": "ZxBing0066",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ZxBing0066/recodo/issues"
+  },
+  "homepage": "https://github.com/ZxBing0066/recodo#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.14.6",
+    "@babel/plugin-transform-runtime": "^7.14.5",
+    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-react": "^7.14.5",
+    "@babel/preset-typescript": "^7.14.5",
+    "@typescript-eslint/eslint-plugin": "^4.28.0",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.6",
+    "eslint": "^7.29.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "html-webpack-plugin": "^4",
+    "prettier": "^2.3.1",
+    "sass": "^1.35.1",
+    "sass-loader": "^12.1.0",
+    "scss": "^0.2.4",
+    "scss-loader": "^0.0.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^4.44.1",
+    "webpack-bundle-analyzer": "^4.4.2",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,31 @@
+{
+  "name": "recodo-live",
+  "version": "0.0.1",
+  "description": "Live editor and preview for React demo",
+  "main": "dist/main.min.js",
+  "files": ["dist/"],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZxBing0066/recodo.git"
+  },
+  "author": "ZxBing0066",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ZxBing0066/recodo/issues"
+  },
+  "homepage": "https://github.com/ZxBing0066/recodo#readme",
+  "dependencies": {
+    "prism-react-renderer": "^1.2.1",
+    "prop-types": "^15.7.2",
+    "react-simple-code-editor": "^0.11.0"
+  },
+  "peerDependencies": {
+    "react": "^17 || ^16"
+  },
+  "devDependencies": {
+    "react": "^16"
+  }
+}

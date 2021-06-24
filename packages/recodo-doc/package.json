@@ -1,0 +1,32 @@
+{
+  "name": "recodo-doc",
+  "version": "0.0.1",
+  "description": "Docs page use data from recodo-gen",
+  "main": "lib/index.js",
+  "files": ["lib/"],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZxBing0066/recodo.git"
+  },
+  "author": "ZxBing0066",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ZxBing0066/recodo/issues"
+  },
+  "homepage": "https://github.com/ZxBing0066/recodo#readme",
+  "dependencies": {
+    "@mdx-js/react": "^1.6.22",
+    "@mdx-js/runtime": "^1.6.22",
+    "@rapiop/mod": "^1.1.0",
+    "lodash": "^4.17.21",
+    "prism-react-renderer": "^1.2.1"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.11",
+    "react": "^16",
+    "react-dom": "^16"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "recodo-gen",
+  "version": "0.0.1",
+  "description": "Generate docs from React Component comment and markdown files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZxBing0066/recodo.git",
+    "directory": "packages/recodo-gen"
+  },
+  "author": "ZxBing0066",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ZxBing0066/recodo/issues"
+  },
+  "homepage": "https://github.com/ZxBing0066/recodo#readme",
+  "dependencies": {
+    "chokidar": "^3.5.2",
+    "doctrine": "^3.0.0",
+    "fs-extra": "^10.0.0",
+    "lodash": "^4.17.21",
+    "react-docgen": "^5.4.0",
+    "yargs": "^17.0.1"
+  }
+}
