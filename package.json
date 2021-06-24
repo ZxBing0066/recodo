@@ -10,10 +10,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev:compiler": "webpack serve --config packages/recodo-compiler/webpack.config.js",
-    "build:compiler": "ENV=production webpack --config packages/recodo-compiler/webpack.config.js",
+    "build:compiler": "NODE_ENV=production webpack --config packages/recodo-compiler/webpack.config.js",
     "build:compiler:analyzer": "ANALYZER=true npm run build:compiler",
     "dev:live": "webpack serve --config packages/recodo-live/webpack.config.js",
-    "build:live": "ENV=production webpack --config packages/recodo-live/webpack.config.js",
+    "build:live": "NODE_ENV=production webpack --config packages/recodo-live/webpack.config.js",
     "build:live:analyzer": "ANALYZER=true npm run build:live",
     "dev:doc": "webpack serve --config packages/recodo-doc/webpack.config.js",
     "build:doc:lib": "babel --config-file './.babelrc' packages/recodo-doc/src/ --extensions '.js,.jsx,.ts,.tsx' -d packages/recodo-doc/lib/"
