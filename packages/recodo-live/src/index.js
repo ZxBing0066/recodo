@@ -10,13 +10,4 @@ import withLive from './hoc/withLive';
 
 export * from './utils/transpile';
 
-export {
-    Editor,
-    // Main exports:
-    LiveProvider,
-    LiveEditor,
-    LiveError,
-    LivePreview,
-    LiveContext,
-    withLive
-};
+export { Editor, LiveProvider, LiveEditor, LiveError, LivePreview, LiveContext, withLive };
