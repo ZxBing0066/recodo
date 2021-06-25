@@ -9,7 +9,6 @@ export const generateElement = ({ code = '', scope = {}, modules }, errorCallbac
     // NOTE: Workaround for classes and arrow functions.
     const transformed = modules ? transform(codeTrimmed) : transform(codeTrimmed).trim();
     const final = `return (function() {${transformed}})();`;
-    console.log(transformed);
     return errorBoundary(evalCode(final, scope, modules), errorCallback);
 };
 
@@ -28,9 +27,7 @@ export const renderElementAsync = (
     };
 
     if (!/render\s*\(/.test(code)) {
-        return errorCallback(
-            new SyntaxError('No-Inline evaluations must call `render`.')
-        );
+        return errorCallback(new SyntaxError('No-Inline evaluations must call `render`.'));
     }
 
     evalCode(transform(code), { ...scope, render }, modules);

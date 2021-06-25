@@ -15,8 +15,6 @@ interface EditorProps {
     language: string;
 }
 export const Editor = ({ live, render, static: _static, noEditor, code, language }: EditorProps) => {
-    console.log(live, render, _static, noEditor, code, language);
-
     if (_static) {
         return (
             <Highlight {...defaultProps} code={code.trim()} language={language as Language}>
