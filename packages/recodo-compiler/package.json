@@ -1,9 +1,12 @@
 {
   "name": "recodo-compiler",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Live editor and preview for React demo",
   "main": "lib/index.js",
-  "files": ["lib/", "dist/"],
+  "files": [
+    "lib/",
+    "dist/"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,7 +26,5 @@
     "acorn-jsx": "^5.3.1",
     "magic-string": "^0.25.7",
     "regexpu-core": "^4.7.1"
-  },
-  "devDependencies": {
   }
 }
