@@ -11,7 +11,11 @@ const getRemoteUrl = (codePath, componentName) => {
 };
 export default () => {
     return (
-        <Provider content={{ examples, docs }} getRemoteUrl={getRemoteUrl}>
+        <Provider
+            content={{ examples, docs }}
+            scope={{ Box: props => <div {...props}></div> }}
+            getRemoteUrl={getRemoteUrl}
+        >
             <Page name={'Box'} />
         </Provider>
     );

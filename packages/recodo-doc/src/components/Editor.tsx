@@ -1,8 +1,9 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import Highlight, { defaultProps, Language } from 'prism-react-renderer';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'recodo-live';
 
 import mod from '../mod';
+import { DocContext } from './Provider';
 
 export const ComponentContext = createContext({});
 
@@ -15,6 +16,7 @@ interface EditorProps {
     language: string;
 }
 export const Editor = ({ live, render, static: _static, noEditor, code, language }: EditorProps) => {
+    const { scope, modules } = useContext(DocContext);
     if (_static) {
         return (
             <Highlight {...defaultProps} code={code.trim()} language={language as Language}>
@@ -32,16 +34,21 @@ export const Editor = ({ live, render, static: _static, noEditor, code, language
             </Highlight>
         );
     }
-    if (live) {
+    if (render || noEditor) {
         return (
-            <LiveProvider code={code.trim()}>
+            <LiveProvider code={code.trim()} scope={scope} modules={modules}>
                 <LivePreview />
-                <LiveEditor />
                 <LiveError />
             </LiveProvider>
         );
     }
-    return null;
+    return (
+        <LiveProvider code={code.trim()} scope={scope} modules={modules}>
+            <LivePreview />
+            <LiveEditor />
+            <LiveError />
+        </LiveProvider>
+    );
 };
 
 export const RemoteEditor = ({ codeUrl, ...rest }: { codeUrl: string } & Omit<EditorProps, 'code'>) => {
