@@ -7,7 +7,7 @@ const isAnalyzer = !!process.env.ANALYZER;
 const packageName = require('./package.json').name;
 
 const webpackConfig = {
-    entry: path.join(__dirname, './index.js'),
+    entry: path.join(__dirname, './src/index.js'),
     output: {
         filename: 'main.min.js',
         path: path.resolve(__dirname, 'dist'),

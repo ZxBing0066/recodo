@@ -15,6 +15,8 @@ interface EditorProps {
     language: string;
 }
 export const Editor = ({ live, render, static: _static, noEditor, code, language }: EditorProps) => {
+    console.log(live, render, _static, noEditor, code, language);
+
     if (_static) {
         return (
             <Highlight {...defaultProps} code={code.trim()} language={language as Language}>
@@ -45,25 +47,40 @@ export const Editor = ({ live, render, static: _static, noEditor, code, language
 };
 
 export const RemoteEditor = ({ codeUrl, ...rest }: { codeUrl: string } & Omit<EditorProps, 'code'>) => {
-    const [code, setCode] = useState<false | string>(false);
+    const [code, setCode] = useState<string>('');
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     useEffect(() => {
         let mounted = true;
         (async () => {
-            let raw = (await mod.import({ file: codeUrl, type: 'raw' })) as string;
-            let demoStartMatch = raw.match(/\/\/\s*demo\s*start\s*/);
-            let demoStartIndex = demoStartMatch ? demoStartMatch.index + demoStartMatch[0].length : undefined;
-            let demoEndMatch = raw.match(/\/\/\s*demo\s*end\s*/);
-            let demoEndIndex = demoEndMatch ? demoEndMatch.index : undefined;
-            raw = raw.slice(demoStartIndex, demoEndIndex) + '\nreturn <Demo />;';
-            if (mounted) setCode(raw);
+            try {
+                let raw = (await mod.import({ file: codeUrl, type: 'raw' })) as string;
+                let demoStartMatch = raw.match(/\/\/\s*demo\s*start\s*/);
+                let demoStartIndex = demoStartMatch ? demoStartMatch.index + demoStartMatch[0].length : undefined;
+                let demoEndMatch = raw.match(/\/\/\s*demo\s*end\s*/);
+                let demoEndIndex = demoEndMatch ? demoEndMatch.index : undefined;
+                raw = raw.slice(demoStartIndex, demoEndIndex) + '\nreturn <Demo />;';
+                if (!mounted) return;
+                setCode(raw);
+            } catch (error) {
+                console.error(error);
+                if (!mounted) return;
+                setError(error);
+            } finally {
+                if (!mounted) return;
+                setLoading(false);
+            }
         })();
         return () => {
             mounted = false;
         };
     }, []);
 
-    if (typeof code === 'string') {
-        return <Editor code={code} {...rest} />;
+    if (loading) {
+        return <span>...loading</span>;
     }
-    return <span>...loading</span>;
+    if (error) {
+        return <div>{error + ''}</div>;
+    }
+    return <Editor code={code} {...rest} />;
 };

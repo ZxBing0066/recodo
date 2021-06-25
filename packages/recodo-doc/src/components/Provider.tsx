@@ -1,5 +1,4 @@
 import React, { createContext, ReactNode, useEffect, useState } from 'react';
-import { MDXProvider } from '@mdx-js/react';
 
 import Code from './Code';
 
@@ -13,6 +12,8 @@ interface Content {
     examples?: any;
     scope?: Record<string, any>;
     modules?: Record<string, any>;
+    components?: any;
+    getRemoteUrl?: (codePath: string, componentName: string, subComponentName: string) => string;
 }
 
 export const DocContext = createContext<Content>({});
@@ -22,9 +23,10 @@ interface ProviderProps {
     children: ReactNode;
     scope?: Record<string, any>;
     modules?: Record<string, any>;
+    getRemoteUrl?: (codePath: string, componentName: string, subComponentName: string) => string;
 }
 
-const Provider = ({ content, children, scope, modules }: ProviderProps) => {
+const Provider = ({ content, children, scope, modules, getRemoteUrl }: ProviderProps) => {
     const [_content, setContent] = useState<Content>(() => (typeof content === 'function' ? null : content));
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(() => (typeof content === 'function' ? true : false));
@@ -59,8 +61,8 @@ const Provider = ({ content, children, scope, modules }: ProviderProps) => {
         return <div>{error}</div>;
     }
     return (
-        <DocContext.Provider value={{ ..._content, scope, modules }}>
-            <MDXProvider components={components}>{children}</MDXProvider>
+        <DocContext.Provider value={{ ..._content, scope, modules, components, getRemoteUrl }}>
+            {children}
         </DocContext.Provider>
     );
 };

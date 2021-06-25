@@ -2,8 +2,8 @@
   "name": "recodo-live",
   "version": "0.0.2",
   "description": "Live editor and preview for React demo",
-  "main": "dist/main.min.js",
-  "files": ["dist/"],
+  "main": "lib/index.js",
+  "files": ["lib/", "dist/"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

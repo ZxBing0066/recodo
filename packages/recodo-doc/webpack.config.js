@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
 const isAnalyzer = !!process.env.ANALYZER;
@@ -9,7 +8,7 @@ const isAnalyzer = !!process.env.ANALYZER;
 const packageName = require('./package.json').name;
 
 const webpackConfig = {
-    entry: path.join(__dirname, './index.js'),
+    entry: path.join(__dirname, './src/index.tsx'),
     output: {
         filename: '[name].min.js',
         path: path.resolve(process.cwd(), 'build', packageName),
@@ -28,16 +27,9 @@ const webpackConfig = {
     //         commonjs: 'react',
     //         commonjs2: 'react'
     //     },
-    //     'react-dom': {
-    //         root: 'ReactDOM',
-    //         amd: 'react-dom',
-    //         commonjs: 'react-dom',
-    //         commonjs2: 'react-dom'
-    //     }
     // },
     plugins: [
         ...(isAnalyzer ? [new BundleAnalyzerPlugin()] : []),
-        new HTMLWebpackPlugin({ template: path.join(__dirname, './index.html'), nodeModules: false }),
         new webpack.DefinePlugin({
             'process.env.BABEL_TYPES_8_BREAKING': JSON.stringify(process.env.NODE_ENV)
         })

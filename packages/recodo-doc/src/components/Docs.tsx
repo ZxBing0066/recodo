@@ -1,16 +1,18 @@
 import React, { useContext } from 'react';
-import MDX from '@mdx-js/runtime';
+import ReactMarkdown from 'react-markdown';
 
+import { CodeContext } from './Code';
 import { DocContext } from './Provider';
 
 const Docs = ({ name, subName }: { name: string; subName?: string }) => {
-    const { docs } = useContext(DocContext);
-
+    const { docs, components } = useContext(DocContext);
     const docInfo = docs?.[name]?.[subName || name]?.info;
 
     return (
         <div>
-            <MDX>{docInfo}</MDX>
+            <CodeContext.Provider value={{ name, subName }}>
+                <ReactMarkdown components={components}>{docInfo}</ReactMarkdown>
+            </CodeContext.Provider>
         </div>
     );
 };
