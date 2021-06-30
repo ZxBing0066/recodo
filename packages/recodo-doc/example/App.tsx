@@ -16,7 +16,7 @@ export default () => {
             scope={{ Box: props => <div {...props}></div> }}
             getRemoteUrl={getRemoteUrl}
         >
-            <Page name={'Box'} />
+            <Page name={'Tree'} />
         </Provider>
     );
 };

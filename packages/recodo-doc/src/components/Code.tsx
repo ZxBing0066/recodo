@@ -1,14 +1,18 @@
 import React, { createContext, useContext } from 'react';
 
+import { codeCls } from './cls';
 import { Editor, RemoteEditor } from './Editor';
 import { DocContext } from './Provider';
 
 export const CodeContext = createContext<{ name?: string; subName?: string }>({});
 
-const Code = ({ children, className, live = true, render, node }) => {
+const Code = ({ children, className, live = true, render, node, inline }) => {
     const { name, subName } = useContext(CodeContext);
     const { getRemoteUrl } = useContext(DocContext);
-    const language = className.replace(/language-/, '');
+
+    if (inline) return <code>{children}</code>;
+
+    const language = className?.replace(/language-/, '');
     const metastring = node?.data?.meta;
     const metaOptions =
         metastring === 'static'
@@ -33,9 +37,17 @@ const Code = ({ children, className, live = true, render, node }) => {
 
     if (codePath) {
         const codeUrl = getRemoteUrl ? getRemoteUrl(codePath, name, subName) : codePath;
-        return <RemoteEditor {...options} codeUrl={codeUrl} />;
+        return (
+            <div className={codeCls}>
+                <RemoteEditor {...options} codeUrl={codeUrl} />
+            </div>
+        );
     }
 
-    return <Editor {...options} code={children} />;
+    return (
+        <div className={codeCls}>
+            <Editor {...options} code={children} />
+        </div>
+    );
 };
 export default Code;

@@ -1,11 +1,51 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
-import Highlight, { defaultProps, Language } from 'prism-react-renderer';
+import React, { createContext, useState, useEffect, useContext, useCallback } from 'react';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'recodo-live';
+
+import github from 'prism-react-renderer/themes/github';
+import nightOwlLight from 'prism-react-renderer/themes/nightOwlLight';
+import nightOwl from 'prism-react-renderer/themes/nightOwl';
+import shadesOfPurple from 'prism-react-renderer/themes/shadesOfPurple';
+import palenight from 'prism-react-renderer/themes/palenight';
+
+const themeList = [github, nightOwlLight, palenight, nightOwl, shadesOfPurple];
 
 import mod from '../mod';
 import { DocContext } from './Provider';
+import {
+    codeCollapseButton,
+    codeEditorCls,
+    codeErrorCls,
+    codeLoadingCls,
+    codePreviewCls,
+    codeThemeSwitcherCls,
+    codeThemeSwitcherCurrentCls,
+    codeToolbarCls
+} from './cls';
 
 export const ComponentContext = createContext({});
+
+const ThemeSwitcher = ({ current, onChange }) => {
+    const clickHandler = useCallback(
+        e => {
+            const i = (e.target as Element).getAttribute('data-i');
+            onChange(i);
+        },
+        [onChange]
+    );
+    return (
+        <div className={codeThemeSwitcherCls}>
+            {themeList.map((theme, i) => (
+                <span
+                    style={{ background: theme.plain.backgroundColor }}
+                    key={i}
+                    data-i={i}
+                    onClick={clickHandler}
+                    className={current == i ? codeThemeSwitcherCurrentCls : ' '}
+                ></span>
+            ))}
+        </div>
+    );
+};
 
 interface EditorProps {
     live?: boolean;
@@ -17,36 +57,55 @@ interface EditorProps {
 }
 export const Editor = ({ live, render, static: _static, noEditor, code, language }: EditorProps) => {
     const { scope, modules } = useContext(DocContext);
+    const [theme, setTheme] = useState(0);
+    const [collapse, setCollapse] = useState(true);
+    code = (code + '')?.trim?.();
+
     if (_static) {
+        const toolbar = (
+            <div className={codeToolbarCls}>
+                <span></span>
+                <ThemeSwitcher current={theme} onChange={setTheme} />
+            </div>
+        );
         return (
-            <Highlight {...defaultProps} code={code.trim()} language={language as Language}>
-                {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                    <pre className={className} style={{ ...style, padding: '20px' }}>
-                        {tokens.map((line, i) => (
-                            <div key={i} {...getLineProps({ line, key: i })}>
-                                {line.map((token, key) => (
-                                    <span key={key} {...getTokenProps({ token, key })} />
-                                ))}
-                            </div>
-                        ))}
-                    </pre>
-                )}
-            </Highlight>
+            <LiveProvider code={code} language={language}>
+                {toolbar}
+                <div className={codeEditorCls}>
+                    <LiveEditor theme={themeList[theme]} disabled />
+                </div>
+            </LiveProvider>
         );
     }
     if (render || noEditor) {
         return (
-            <LiveProvider code={code.trim()} scope={scope} modules={modules}>
-                <LivePreview />
-                <LiveError />
+            <LiveProvider code={code} language={language} scope={scope} modules={modules}>
+                <div className={codePreviewCls}>
+                    <LivePreview />
+                    <LiveError className={codeErrorCls} />
+                </div>
             </LiveProvider>
         );
     }
+
+    const toolbar = (
+        <div className={codeToolbarCls}>
+            <div className={codeCollapseButton} data-active={collapse} onClick={() => setCollapse(!collapse)}>
+                VIEW CODE
+            </div>
+            <ThemeSwitcher current={theme} onChange={setTheme} />
+        </div>
+    );
     return (
-        <LiveProvider code={code.trim()} scope={scope} modules={modules}>
-            <LivePreview />
-            <LiveEditor />
-            <LiveError />
+        <LiveProvider code={code} language={language} scope={scope} modules={modules}>
+            <div className={codePreviewCls}>
+                <LivePreview />
+                <LiveError className={codeErrorCls} />
+            </div>
+            {toolbar}
+            <div className={codeEditorCls} style={{ display: collapse ? 'none' : 'block' }}>
+                <LiveEditor theme={themeList[theme]} />
+            </div>
         </LiveProvider>
     );
 };
@@ -82,10 +141,10 @@ export const RemoteEditor = ({ codeUrl, ...rest }: { codeUrl: string } & Omit<Ed
     }, []);
 
     if (loading) {
-        return <span>...loading</span>;
+        return <span className={codeLoadingCls}>...loading</span>;
     }
     if (error) {
-        return <div>{error + ''}</div>;
+        return <pre className={codeErrorCls}>{error + ''}</pre>;
     }
     return <Editor code={code} {...rest} />;
 };
