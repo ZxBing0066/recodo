@@ -1,112 +1,106 @@
 // used for debugging, without the noise created by
 // circular references
 function toJSON(node) {
-	const obj = {};
+    const obj = {};
 
-	Object.keys(node).forEach(key => {
-		if (
-			key === 'parent' ||
-			key === 'program' ||
-			key === 'keys' ||
-			key === '__wrapped'
-		)
-			return;
+    Object.keys(node).forEach(key => {
+        if (key === 'parent' || key === 'program' || key === 'keys' || key === '__wrapped') return;
 
-		if (Array.isArray(node[key])) {
-			obj[key] = node[key].map(toJSON);
-		} else if (node[key] && node[key].toJSON) {
-			obj[key] = node[key].toJSON();
-		} else {
-			obj[key] = node[key];
-		}
-	});
+        if (Array.isArray(node[key])) {
+            obj[key] = node[key].map(toJSON);
+        } else if (node[key] && node[key].toJSON) {
+            obj[key] = node[key].toJSON();
+        } else {
+            obj[key] = node[key];
+        }
+    });
 
-	return obj;
+    return obj;
 }
 
 export default class Node {
-	ancestor(level) {
-		let node = this;
-		while (level--) {
-			node = node.parent;
-			if (!node) return null;
-		}
+    ancestor(level) {
+        let node = this;
+        while (level--) {
+            node = node.parent;
+            if (!node) return null;
+        }
 
-		return node;
-	}
+        return node;
+    }
 
-	contains(node) {
-		while (node) {
-			if (node === this) return true;
-			node = node.parent;
-		}
+    contains(node) {
+        while (node) {
+            if (node === this) return true;
+            node = node.parent;
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	findLexicalBoundary() {
-		return this.parent.findLexicalBoundary();
-	}
+    findLexicalBoundary() {
+        return this.parent.findLexicalBoundary();
+    }
 
-	findNearest(type) {
-		if (typeof type === 'string') type = new RegExp(`^${type}$`);
-		if (type.test(this.type)) return this;
-		return this.parent.findNearest(type);
-	}
+    findNearest(type) {
+        if (typeof type === 'string') type = new RegExp(`^${type}$`);
+        if (type.test(this.type)) return this;
+        return this.parent.findNearest(type);
+    }
 
-	unparenthesizedParent() {
-		let node = this.parent;
-		while (node && node.type === 'ParenthesizedExpression') {
-			node = node.parent;
-		}
-		return node;
-	}
+    unparenthesizedParent() {
+        let node = this.parent;
+        while (node && node.type === 'ParenthesizedExpression') {
+            node = node.parent;
+        }
+        return node;
+    }
 
-	unparenthesize() {
-		let node = this;
-		while (node.type === 'ParenthesizedExpression') {
-			node = node.expression;
-		}
-		return node;
-	}
+    unparenthesize() {
+        let node = this;
+        while (node.type === 'ParenthesizedExpression') {
+            node = node.expression;
+        }
+        return node;
+    }
 
-	findScope(functionScope) {
-		return this.parent.findScope(functionScope);
-	}
+    findScope(functionScope) {
+        return this.parent.findScope(functionScope);
+    }
 
-	getIndentation() {
-		return this.parent.getIndentation();
-	}
+    getIndentation() {
+        return this.parent.getIndentation();
+    }
 
-	initialise(transforms) {
-		for (const key of this.keys) {
-			const value = this[key];
+    initialise(transforms) {
+        for (const key of this.keys) {
+            const value = this[key];
 
-			if (Array.isArray(value)) {
-				value.forEach(node => node && node.initialise(transforms));
-			} else if (value && typeof value === 'object') {
-				value.initialise(transforms);
-			}
-		}
-	}
+            if (Array.isArray(value)) {
+                value.forEach(node => node && node.initialise(transforms));
+            } else if (value && typeof value === 'object') {
+                value.initialise(transforms);
+            }
+        }
+    }
 
-	toJSON() {
-		return toJSON(this);
-	}
+    toJSON() {
+        return toJSON(this);
+    }
 
-	toString() {
-		return this.program.magicString.original.slice(this.start, this.end);
-	}
+    toString() {
+        return this.program.magicString.original.slice(this.start, this.end);
+    }
 
-	transpile(code, transforms) {
-		for (const key of this.keys) {
-			const value = this[key];
+    transpile(code, transforms) {
+        for (const key of this.keys) {
+            const value = this[key];
 
-			if (Array.isArray(value)) {
-				value.forEach(node => node && node.transpile(code, transforms));
-			} else if (value && typeof value === 'object') {
-				value.transpile(code, transforms);
-			}
-		}
-	}
+            if (Array.isArray(value)) {
+                value.forEach(node => node && node.transpile(code, transforms));
+            } else if (value && typeof value === 'object') {
+                value.transpile(code, transforms);
+            }
+        }
+    }
 }
