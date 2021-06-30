@@ -1,4 +1,4 @@
-import { transform as _transform } from 'recodo-compiler';
+import { transform } from 'recodo-compiler';
 
 export const _poly = { assign: Object.assign };
 
@@ -10,4 +10,4 @@ const opts = {
     }
 };
 
-export default code => _transform(code, opts).code;
+export default code => transform(code, opts).code;

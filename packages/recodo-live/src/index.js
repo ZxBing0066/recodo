@@ -6,8 +6,4 @@ import LiveError from './components/Live/LiveError';
 import LivePreview from './components/Live/LivePreview';
 import LiveContext from './components/Live/LiveContext';
 
-import withLive from './hoc/withLive';
-
-export * from './utils/transpile';
-
-export { Editor, LiveProvider, LiveEditor, LiveError, LivePreview, LiveContext, withLive };
+export { Editor, LiveProvider, LiveEditor, LiveError, LivePreview, LiveContext };
