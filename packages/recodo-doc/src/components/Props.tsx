@@ -46,12 +46,12 @@ const Description = prop => {
     const { description } = prop;
     return (
         <>
-            <p>{description?.description}</p>
+            <div>{description?.description}</div>
             {description?.tags?.map((tag, i) => (
-                <p key={i}>
+                <div key={i}>
                     <div className={propsTableDescTagTitleCls}>@{tag.title}</div>
                     {tag.description}
-                </p>
+                </div>
             ))}
         </>
     );
