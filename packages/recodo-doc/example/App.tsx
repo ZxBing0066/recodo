@@ -13,7 +13,7 @@ export default () => {
     return (
         <Provider
             content={{ examples, docs }}
-            scope={{ Box: props => <div {...props}></div> }}
+            scope={{ Box: props => <div {...props}></div>, Input: props => <input {...props} />, Form:  props => <form {...props} />}}
             getRemoteUrl={getRemoteUrl}
         >
             <Page name={'Input'} />

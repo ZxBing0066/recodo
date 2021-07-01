@@ -2,6 +2,7 @@
 
 -   [Compiler](compiler.md)
 -   [Live](live.md)
+-   [Doc](doc.md)
 
 <!-- -   Translations
 
