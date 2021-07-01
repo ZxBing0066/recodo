@@ -5,21 +5,22 @@ import nightOwlLight from 'prism-react-renderer/themes/nightOwlLight';
 import { propsCls, propsTableCls, propsTableDeprecatedCls, propsTableDescTagTitleCls } from './cls';
 import { DocContext } from './Provider';
 
-const highlightCode = (code, language) => (
-    <Highlight Prism={Prism} code={code} theme={nightOwlLight} language={language}>
-        {({ tokens, getLineProps, getTokenProps }) => (
-            <>
-                {tokens.map((line, i) => (
-                    <div {...getLineProps({ line, key: i })}>
-                        {line.map((token, key) => (
-                            <span {...getTokenProps({ token, key })} />
-                        ))}
-                    </div>
-                ))}
-            </>
-        )}
-    </Highlight>
-);
+const highlightCode = (code, language) =>
+    code ? (
+        <Highlight Prism={Prism} code={code} theme={nightOwlLight} language={language}>
+            {({ tokens, getLineProps, getTokenProps }) => (
+                <>
+                    {tokens.map((line, i) => (
+                        <div {...getLineProps({ line, key: i })}>
+                            {line.map((token, key) => (
+                                <span {...getTokenProps({ token, key })} />
+                            ))}
+                        </div>
+                    ))}
+                </>
+            )}
+        </Highlight>
+    ) : null;
 
 const Type = prop => {
     const { tsType, type } = prop;
@@ -56,7 +57,7 @@ const Description = prop => {
     );
 };
 
-const getTags = (description): { deprecated?: true; ignored?: true } => {
+const getTags = (description): { deprecated?: true; ignore?: true } => {
     const tags = {};
     description?.tags.forEach(tag => {
         tags[tag.title] = true;
@@ -97,7 +98,7 @@ const Props = ({ name, subName }: { name: string; subName?: string }) => {
                             const prop = props[key];
                             const { required, defaultValue, description } = prop;
                             const tags = getTags(description);
-                            if (tags.ignored) return null;
+                            if (tags.ignore) return null;
                             return (
                                 <tr key={key} className={tags.deprecated ? propsTableDeprecatedCls : ''}>
                                     <td>{key}</td>
