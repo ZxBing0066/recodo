@@ -18,7 +18,7 @@
     "build:live:lib": "babel --config-file './.babelrc' packages/recodo-live/src/ --extensions '.js,.jsx,.ts,.tsx' -d packages/recodo-live/lib/",
     "build:live:analyzer": "ANALYZER=true npm run build:live",
     "dev:doc": "webpack serve --config packages/recodo-doc/example/webpack.config.js",
-    "build:doc:lib": "babel --config-file './.babelrc' packages/recodo-doc/src/ --extensions '.js,.jsx,.ts,.tsx' -d packages/recodo-doc/lib/"
+    "build:doc:lib": "babel --config-file './.babelrc' packages/recodo-doc/src/ --extensions '.js,.jsx,.ts,.tsx' -d packages/recodo-doc/lib/ && sass packages/recodo-doc/src/index.scss packages/recodo-doc/lib/doc.css"
   },
   "repository": {
     "type": "git",
@@ -55,9 +55,7 @@
     "lerna": "^4.0.0",
     "prettier": "^2.3.1",
     "sass": "^1.35.1",
-    "sass-loader": "^12.1.0",
-    "scss": "^0.2.4",
-    "scss-loader": "^0.0.1",
+    "sass-loader": "^10",
     "style-loader": "^2.0.0",
     "webpack": "^4.44.1",
     "webpack-bundle-analyzer": "^4.4.2",

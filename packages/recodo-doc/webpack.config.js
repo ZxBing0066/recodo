@@ -11,7 +11,7 @@ const webpackConfig = {
     entry: path.join(__dirname, './src/index.tsx'),
     output: {
         filename: '[name].min.js',
-        path: path.resolve(process.cwd(), 'build', packageName),
+        path: path.resolve(__dirname, 'dist'),
         library: packageName,
         libraryTarget: 'umd'
     },
@@ -20,14 +20,6 @@ const webpackConfig = {
     resolve: {
         extensions: ['.ts', '.js', '.tsx', '.jsx', '.json']
     },
-    // externals: {
-    //     react: {
-    //         root: 'React',
-    //         amd: 'react',
-    //         commonjs: 'react',
-    //         commonjs2: 'react'
-    //     },
-    // },
     plugins: [
         ...(isAnalyzer ? [new BundleAnalyzerPlugin()] : []),
         new webpack.DefinePlugin({

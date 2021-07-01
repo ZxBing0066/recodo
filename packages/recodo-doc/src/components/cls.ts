@@ -16,3 +16,5 @@ export const propsTableDescTagTitleCls = propsTableCls + '-desc-tag-title';
 export const propsTableDeprecatedCls = propsTableCls + '-deprecated';
 
 export const pageCls = prefix + '-page';
+
+export const docCls = prefix + '-doc';

@@ -109,14 +109,13 @@
     }
 }
 
-.recodo-page {
+.recodo-doc {
     h1,
     h2,
     h3,
     h4,
     h5,
-    h6,
-    h7 {
+    h6 {
         font-family: monospace;
     }
     h1 {
@@ -140,8 +139,7 @@
         margin-bottom: 8px;
     }
     h5,
-    h6,
-    h7 {
+    h6 {
         font-size: 14px;
         font-weight: 400;
         margin-bottom: 8px;
