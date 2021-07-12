@@ -6,7 +6,8 @@ const opts = {
     objectAssign: '_poly.assign',
     transforms: {
         dangerousForOf: true,
-        dangerousTaggedTemplateString: true
+        dangerousTaggedTemplateString: true,
+        asyncAwait: false
     }
 };
 
