@@ -1,4 +1,4 @@
-import Highlight, { Prism } from 'prism-react-renderer';
+import Highlight, { Prism, PrismTheme } from 'prism-react-renderer';
 import React, { useContext } from 'react';
 import nightOwlLight from 'prism-react-renderer/themes/nightOwlLight';
 
@@ -8,7 +8,7 @@ import ErrorBoundary from '../ErrorBoundary';
 
 const highlightCode = (code, language) =>
     code ? (
-        <Highlight Prism={Prism} code={code} theme={nightOwlLight} language={language}>
+        <Highlight Prism={Prism} code={code} theme={nightOwlLight as PrismTheme} language={language}>
             {({ tokens, getLineProps, getTokenProps }) => (
                 <>
                     {tokens.map((line, i) => (
