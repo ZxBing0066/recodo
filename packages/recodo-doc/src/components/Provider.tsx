@@ -3,7 +3,8 @@ import React, { createContext, ReactNode, useEffect, useState } from 'react';
 import Code from './Code';
 
 const components = {
-    code: Code
+    code: Code,
+    pre: 'div'
 };
 
 interface Content {

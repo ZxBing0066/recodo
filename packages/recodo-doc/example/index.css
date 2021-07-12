@@ -1,0 +1,215 @@
+a,
+abbr,
+acronym,
+address,
+applet,
+article,
+aside,
+audio,
+b,
+big,
+blockquote,
+body,
+canvas,
+caption,
+center,
+cite,
+code,
+dd,
+del,
+details,
+dfn,
+div,
+dl,
+dt,
+em,
+embed,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+hgroup,
+html,
+i,
+iframe,
+img,
+ins,
+kbd,
+label,
+legend,
+li,
+mark,
+menu,
+nav,
+object,
+ol,
+output,
+p,
+pre,
+q,
+ruby,
+s,
+samp,
+section,
+small,
+span,
+strike,
+strong,
+sub,
+summary,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+time,
+tr,
+tt,
+u,
+ul,
+var,
+video {
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol,
+ul {
+    list-style: none;
+}
+blockquote,
+q {
+    quotes: none;
+}
+blockquote:after,
+blockquote:before,
+q:after,
+q:before {
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.editor_transparent {
+    background-color: #fff !important;
+    background-image: linear-gradient(45deg, #efefef 25%, transparent 25%, transparent 75%, #efefef 75%, #efefef),
+        linear-gradient(45deg, #efefef 25%, transparent 25%, transparent 75%, #efefef 75%, #efefef) !important;
+    background-position: 0 0, 8px 8px !important;
+    background-size: 16px 16px !important;
+}
+
+form.demo-form,
+.demo-wrap {
+    padding: 10px;
+    border: 1px dashed #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.demo-wrap {
+    border-style: solid;
+}
+
+.demo-block {
+    margin-right: 10px;
+    display: inline-block;
+}
+.demo-block-lg {
+    margin-right: 30px;
+    display: inline-block;
+}
+.demo-block-row {
+    display: block;
+    margin-right: 0;
+}
+.demo-block-row + .demo-block-row {
+    margin-top: 10px;
+}
+.demo-block-row + .demo-block-row.demo-block-lg {
+    margin-top: 30px;
+}
+
+.demo-title {
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.clear-fixed:before,
+.clear-fixed:after {
+    content: ' ';
+    display: table;
+}
+.clear-fixed:after {
+    clear: both;
+}
+
+.noeditor-wrap {
+    padding: 16px;
+    border: 1px #e8e8e8 solid;
+    border-radius: 3px;
+    width: 100%;
+    display: inline-block;
+}
+
+/*---滚动条默认显示样式--*/
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5);
+    outline-offset: -2px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    width: 6px;
+    height: 6px;
+    border-radius: 6px;
+}
+
+/*---鼠标点击滚动条显示样式--*/
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+}
+
+/*---滚动条大小--*/
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+/*---滚动框背景样式--*/
+::-webkit-scrollbar-track-piece {
+    background-color: transparent;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: transparent;
+}

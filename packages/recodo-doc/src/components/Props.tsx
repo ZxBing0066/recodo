@@ -4,6 +4,7 @@ import nightOwlLight from 'prism-react-renderer/themes/nightOwlLight';
 
 import { propsCls, propsTableCls, propsTableDeprecatedCls, propsTableDescTagTitleCls } from './cls';
 import { DocContext } from './Provider';
+import ErrorBoundary from '../ErrorBoundary';
 
 const highlightCode = (code, language) =>
     code ? (
@@ -69,54 +70,58 @@ const Props = ({ name, subName }: { name: string; subName?: string }) => {
     const { examples } = useContext(DocContext);
 
     const info = examples?.[name]?.[subName || name]?.info;
-    const props = info?.props;
+    const props = info?.props || {};
     const propKeys = Object.keys(props);
 
+    if (!propKeys.length) return null;
+
     return (
-        <div>
-            <h2>props</h2>
-            <div className={propsCls}>
-                <table className={propsTableCls}>
-                    <colgroup>
-                        <col style={{ width: '100px' }} />
-                        <col style={{ width: '200px' }} />
-                        <col style={{ width: '80px' }} />
-                        <col style={{ width: '80px' }} />
-                        <col />
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th>Prop Name</th>
-                            <th>Type</th>
-                            <th>Required</th>
-                            <th>Default</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {propKeys.map(key => {
-                            const prop = props[key];
-                            const { required, defaultValue, description } = prop;
-                            const tags = getTags(description);
-                            if (tags.ignore) return null;
-                            return (
-                                <tr key={key} className={tags.deprecated ? propsTableDeprecatedCls : ''}>
-                                    <td>{key}</td>
-                                    <td>
-                                        <Type {...prop} />
-                                    </td>
-                                    <td>{required ? 'required' : ''}</td>
-                                    <td>{defaultValue?.value}</td>
-                                    <td>
-                                        <Description {...prop} />
-                                    </td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
+        <ErrorBoundary>
+            <div>
+                <h2>props</h2>
+                <div className={propsCls}>
+                    <table className={propsTableCls}>
+                        <colgroup>
+                            <col style={{ width: '100px' }} />
+                            <col style={{ width: '200px' }} />
+                            <col style={{ width: '80px' }} />
+                            <col style={{ width: '80px' }} />
+                            <col />
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>Prop Name</th>
+                                <th>Type</th>
+                                <th>Required</th>
+                                <th>Default</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {propKeys.map(key => {
+                                const prop = props[key];
+                                const { required, defaultValue, description } = prop;
+                                const tags = getTags(description);
+                                if (tags.ignore) return null;
+                                return (
+                                    <tr key={key} className={tags.deprecated ? propsTableDeprecatedCls : ''}>
+                                        <td>{key}</td>
+                                        <td>
+                                            <Type {...prop} />
+                                        </td>
+                                        <td>{required ? 'required' : ''}</td>
+                                        <td>{defaultValue?.value}</td>
+                                        <td>
+                                            <Description {...prop} />
+                                        </td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
+        </ErrorBoundary>
     );
 };
 
