@@ -60,7 +60,7 @@ const Description = prop => {
 
 const getTags = (description): { deprecated?: true; ignore?: true } => {
     const tags = {};
-    description?.tags.forEach(tag => {
+    description?.tags?.forEach(tag => {
         tags[tag.title] = true;
     });
     return tags;
