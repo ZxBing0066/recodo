@@ -4,7 +4,8 @@
   "description": "Docs page use data from recodo-gen",
   "main": "lib/index.js",
   "files": [
-    "lib/"
+    "lib/",
+    "dist/"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,12 +21,16 @@
   },
   "homepage": "https://github.com/ZxBing0066/recodo#readme",
   "dependencies": {
-    "@rapiop/mod": "^1.1.1",
     "lodash": "^4.17.21",
     "prism-react-renderer": "^1.2.1",
     "react-markdown": "^6.0.2"
   },
+  "peerDependencies": {
+    "@rapiop/mod": "^1.1.1",
+    "react": "^16"
+  },
   "devDependencies": {
+    "@rapiop/mod": "^1.1.1",
     "@types/react": "^16",
     "react": "^16",
     "react-dom": "^16"

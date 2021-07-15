@@ -71,12 +71,24 @@ const webpackConfig = {
             }
         ]
     },
-    devServer: {
-        port: 9000,
-        disableHostCheck: true,
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+    externals: {
+        react: {
+            root: 'React',
+            amd: 'react',
+            commonjs: 'react',
+            commonjs2: 'react'
+        },
+        'react-dom': {
+            root: 'ReactDOM',
+            amd: 'react-dom',
+            commonjs: 'react-dom',
+            commonjs2: 'react-dom'
+        },
+        '@rapiop/mod': {
+            root: 'mod',
+            amd: '@rapiop/mod',
+            commonjs: '@rapiop/mod',
+            commonjs2: '@rapiop/mod'
         }
     },
     node: {
