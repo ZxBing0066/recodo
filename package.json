@@ -19,7 +19,8 @@
     "build:doc:dist": "NODE_ENV=production webpack --config packages/recodo-doc/webpack.config.js",
     "build:doc:dist:analyzer": "ANALYZER=true npm run build:doc:dist",
     "build:doc:lib": "babel --config-file './.babelrc' packages/recodo-doc/src/ --extensions '.js,.jsx,.ts,.tsx' -d packages/recodo-doc/lib/ && sass packages/recodo-doc/src/index.scss packages/recodo-doc/lib/doc.css",
-    "start:docsify": "docsify serve docs"
+    "start:docsify": "docsify serve docs",
+    "dev": "npm run build:compiler:lib -- --watch & npm run build:live:lib -- --watch & npm run dev:doc"
   },
   "repository": {
     "type": "git",

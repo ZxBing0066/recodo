@@ -1,10 +1,10 @@
 import Node from '../Node.js';
-import CompileError from '../../utils/CompileError.js';
 
 export default class ExportDefaultDeclaration extends Node {
-	initialise(transforms) {
-		if (transforms.moduleExport)
-			CompileError.missingTransform("export", "moduleExport", this);
-		super.initialise(transforms);
-	}
+    transpile(code, transforms) {
+        const { start, end, declaration } = this;
+        const replaceCode = `module.exports = ${declaration.name};`;
+        code.overwrite(start, end, replaceCode);
+        super.transpile(code, transforms);
+    }
 }

@@ -1,10 +1,13 @@
 import Node from '../Node.js';
-import CompileError from '../../utils/CompileError.js';
 
 export default class ExportNamedDeclaration extends Node {
-	initialise(transforms) {
-		if (transforms.moduleExport)
-			CompileError.missingTransform("export", "moduleExport", this);
-		super.initialise(transforms);
-	}
+    transpile(code, transforms) {
+        const { start, end, specifiers } = this;
+        let replaceCode = '';
+        specifiers.forEach(specifier => {
+            replaceCode += `exports.${specifier.local.name} = ${specifier.exported.name};`;
+        });
+        code.overwrite(start, end, replaceCode);
+        super.transpile(code, transforms);
+    }
 }

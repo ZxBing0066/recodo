@@ -7,9 +7,7 @@ export const generateElement = ({ code = '', scope = {}, modules }, errorCallbac
     const codeTrimmed = code.trim().replace(/;$/, '');
 
     // NOTE: Workaround for classes and arrow functions.
-    const transformed = modules ? transform(codeTrimmed) : transform(codeTrimmed).trim();
-    const final = `return (function() {${transformed}})();`;
-    return errorBoundary(evalCode(final, scope, modules), errorCallback);
+    return errorBoundary(evalCode(transform(codeTrimmed), scope, modules), errorCallback);
 };
 
 export const renderElementAsync = (
