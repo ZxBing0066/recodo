@@ -1,6 +1,7 @@
 import { Parser } from 'acorn';
 import acornJsx from 'acorn-jsx';
 import acornDynamicImport from 'acorn-dynamic-import';
+
 import Program from './program/Program.js';
 import { features, matrix } from './support.js';
 import getSnippet from './utils/getSnippet.js';
