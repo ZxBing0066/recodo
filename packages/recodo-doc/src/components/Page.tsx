@@ -30,6 +30,8 @@ const Page = ({ name, reportAnchorList }: { name: string; reportAnchorList?: (an
                 const i = {
                     level,
                     text: (h as HTMLElement).innerText || h.querySelector('a')?.innerText,
+                    link: (h.querySelector('.recodo-anchor') as HTMLLinkElement)?.href,
+                    id: h.querySelector('.recodo-anchor')?.id,
                     children: [],
                     parent: pos,
                     h
@@ -47,6 +49,8 @@ const Page = ({ name, reportAnchorList }: { name: string; reportAnchorList?: (an
                 const i = {
                     level,
                     text: (h as HTMLElement).innerText || h.querySelector('a')?.innerText,
+                    link: (h.querySelector('.recodo-anchor') as HTMLLinkElement)?.href,
+                    id: h.querySelector('.recodo-anchor')?.id,
                     children: [],
                     parent,
                     h
