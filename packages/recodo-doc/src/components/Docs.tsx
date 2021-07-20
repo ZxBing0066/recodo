@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import ReactMarkdown from 'react-markdown';
-import ErrorBoundary from '../ErrorBoundary';
 
+import ErrorBoundary from '../ErrorBoundary';
 import { docCls } from './cls';
 import { CodeContext } from './Code';
 import { DocContext } from './Provider';

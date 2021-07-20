@@ -49,4 +49,4 @@ const renderDoc = (name, dom) => {
     });
 };
 
-renderDoc('AutoComplete', document.getElementById('app'));
+renderDoc('Input', document.getElementById('app'));

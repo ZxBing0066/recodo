@@ -73,56 +73,60 @@
 }
 
 .recodo-props {
-    background: #ffffff;
-    border: 1px solid #efeff8;
-    padding: 24px;
+    .recodo-props-table-wrap {
+        background: #ffffff;
+        border: 1px solid #efeff8;
+        padding: 24px;
 
-    .recodo-props-table {
-        width: 100%;
-        border-spacing: 0;
-        border-collapse: collapse;
-        font-size: 12px;
-        font-family: monospace;
-        font-weight: 400;
-        &,
-        * {
-            margin: 0;
-            padding: 0;
-        }
-        th {
-            text-align: left;
-            line-height: 20px;
-            color: #526075;
-        }
-        td {
-            color: #0a1633;
-        }
-        th,
-        td {
-            padding: 12px;
-        }
-        tr {
-            border-bottom: 1px solid #c3cad9;
-        }
-        tbody > tr:nth-child(2n + 1) {
-            background: #f6f6fb;
-        }
-        tbody > tr:hover {
-            background: #f4f6ff;
-        }
+        .recodo-props-table {
+            width: 100%;
+            border-spacing: 0;
+            border-collapse: collapse;
+            font-size: 12px;
+            font-family: monospace;
+            font-weight: 400;
+            &,
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            th {
+                text-align: left;
+                line-height: 20px;
+                color: #526075;
+            }
+            td {
+                color: #0a1633;
+            }
+            th,
+            td {
+                padding: 12px;
+            }
+            tr {
+                border-bottom: 1px solid #c3cad9;
+            }
+            tbody > tr:nth-child(2n + 1) {
+                background: #f6f6fb;
+            }
+            tbody > tr:hover {
+                background: #f4f6ff;
+            }
 
-        .recodo-props-table-desc-tag-title {
-            font-weight: 500;
-        }
-        tr.recodo-props-table-deprecated {
-            text-decoration: line-through;
-            opacity: 0.5;
-            background: #ebebf1 !important;
+            .recodo-props-table-desc-tag-title {
+                font-weight: 500;
+            }
+            tr.recodo-props-table-deprecated {
+                text-decoration: line-through;
+                opacity: 0.5;
+                background: #ebebf1 !important;
+            }
         }
     }
 }
 
-.recodo-doc {
+.recodo-doc,
+.recodo-props,
+.recodo-component-wrap {
     font-size: 14px;
 
     > h1,
@@ -158,5 +162,20 @@
         font-size: 14px;
         font-weight: 400;
         margin: 8px 0;
+    }
+}
+
+.recodo-anchor {
+    position: relative;
+    margin-right: -16px;
+    left: -20px;
+    .recodo-anchor-icon {
+        visibility: hidden;
+        vertical-align: middle;
+    }
+    &:hover {
+        .recodo-anchor-icon {
+            visibility: visible;
+        }
     }
 }

@@ -12,7 +12,7 @@ const getRemoteUrl = (codePath, componentName) => {
 const App = ({ name, scope }: { name: string; scope: any }) => {
     return (
         <Provider content={{ examples, docs }} getRemoteUrl={getRemoteUrl} scope={{ React, ...scope }}>
-            <Page name={name} />
+            <Page name={name} reportAnchorList={console.log} />
         </Provider>
     );
 };

@@ -2,9 +2,10 @@ import Highlight, { Prism, PrismTheme } from 'prism-react-renderer';
 import React, { useContext } from 'react';
 import nightOwlLight from 'prism-react-renderer/themes/nightOwlLight';
 
-import { propsCls, propsTableCls, propsTableDeprecatedCls, propsTableDescTagTitleCls } from './cls';
+import { propsCls, propsTableCls, propsTableDeprecatedCls, propsTableDescTagTitleCls, propsTableWrapCls } from './cls';
 import { DocContext } from './Provider';
 import ErrorBoundary from '../ErrorBoundary';
+import { Hn } from './Components';
 
 const highlightCode = (code, language) =>
     code ? (
@@ -77,9 +78,9 @@ const Props = ({ name, subName }: { name: string; subName?: string }) => {
 
     return (
         <ErrorBoundary>
-            <div>
-                <h2>props</h2>
-                <div className={propsCls}>
+            <div className={propsCls}>
+                <Hn level={3}>props</Hn>
+                <div className={propsTableWrapCls}>
                     <table className={propsTableCls}>
                         <colgroup>
                             <col style={{ width: '100px' }} />

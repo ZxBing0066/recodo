@@ -213,3 +213,7 @@ form.demo-form,
 ::-webkit-scrollbar-corner {
     background-color: transparent;
 }
+
+#app {
+    padding: 0 20px;
+}

@@ -1,11 +1,6 @@
 import React, { createContext, ReactNode, useEffect, useState } from 'react';
 
-import Code from './Code';
-
-const components = {
-    code: Code,
-    pre: 'div'
-};
+import components from './Components';
 
 interface Content {
     docs?: any;
