@@ -12,6 +12,7 @@ const themeList = [github, nightOwlLight, palenight, nightOwl, shadesOfPurple];
 import mod from '../mod';
 import { DocContext } from './Provider';
 import {
+    codeCls,
     codeCollapseButton,
     codeEditorCls,
     codeErrorCls,
@@ -69,22 +70,26 @@ export const Editor = ({ live, render, static: _static, noEditor, code, language
             </div>
         );
         return (
-            <LiveProvider code={code} language={language}>
-                {toolbar}
-                <div className={codeEditorCls}>
-                    <LiveEditor theme={themeList[theme]} disabled />
-                </div>
-            </LiveProvider>
+            <div className={codeCls}>
+                <LiveProvider code={code} language={language}>
+                    {toolbar}
+                    <div className={codeEditorCls}>
+                        <LiveEditor theme={themeList[theme]} disabled />
+                    </div>
+                </LiveProvider>
+            </div>
         );
     }
     if (render || noEditor) {
         return (
-            <LiveProvider code={code} language={language} scope={scope} modules={modules}>
-                <div className={codePreviewCls}>
-                    <LivePreview />
-                    <LiveError className={codeErrorCls} />
-                </div>
-            </LiveProvider>
+            <div className={codeCls}>
+                <LiveProvider code={code} language={language} scope={scope} modules={modules}>
+                    <div className={codePreviewCls}>
+                        <LivePreview />
+                        <LiveError className={codeErrorCls} />
+                    </div>
+                </LiveProvider>
+            </div>
         );
     }
 
@@ -97,16 +102,18 @@ export const Editor = ({ live, render, static: _static, noEditor, code, language
         </div>
     );
     return (
-        <LiveProvider code={code} language={language} scope={scope} modules={modules}>
-            <div className={codePreviewCls}>
-                <LivePreview />
-                <LiveError className={codeErrorCls} />
-            </div>
-            {toolbar}
-            <div className={codeEditorCls} style={{ display: collapse ? 'none' : 'block' }}>
-                <LiveEditor theme={themeList[theme]} />
-            </div>
-        </LiveProvider>
+        <div className={codeCls}>
+            <LiveProvider code={code} language={language} scope={scope} modules={modules}>
+                <div className={codePreviewCls}>
+                    <LivePreview />
+                    <LiveError className={codeErrorCls} />
+                </div>
+                {toolbar}
+                <div className={codeEditorCls} style={{ display: collapse ? 'none' : 'block' }}>
+                    <LiveEditor theme={themeList[theme]} />
+                </div>
+            </LiveProvider>
+        </div>
     );
 };
 

@@ -1,6 +1,5 @@
 import React, { createContext, useContext } from 'react';
 
-import { codeCls } from './cls';
 import { Editor, RemoteEditor } from './Editor';
 import { DocContext } from './Provider';
 
@@ -37,17 +36,9 @@ const Code = ({ children, className, live = true, render, node, inline }) => {
 
     if (codePath) {
         const codeUrl = getRemoteUrl ? getRemoteUrl(codePath, name, subName) : codePath;
-        return (
-            <div className={codeCls}>
-                <RemoteEditor {...options} codeUrl={codeUrl} />
-            </div>
-        );
+        return <RemoteEditor {...options} codeUrl={codeUrl} />;
     }
 
-    return (
-        <div className={codeCls}>
-            <Editor {...options} code={children} />
-        </div>
-    );
+    return <Editor {...options} code={children} />;
 };
 export default Code;
