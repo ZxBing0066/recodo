@@ -22,5 +22,6 @@ export const codeThemeSwitcherCurrentCls = codeThemeSwitcherCls + '-current';
 export const codeToolbarCls = codeCls + '-toolbar';
 export const codeCollapseButton = codeCls + '-collapse-button';
 
+export const headingCls = prefix + '-heading'
 export const anchorCls = prefix + '-anchor';
 export const anchorIconCls = anchorCls + '-icon';

@@ -17,7 +17,7 @@ mod.export('react-dom', ReactDOM);
 mod.config({
     modules: {
         '@ucloud-fe/react-components': {
-            js: 'https://cdn.jsdelivr.net/npm/@ucloud-fe/react-components@1.1.6/dist/main.min.js',
+            js: 'https://cdn.jsdelivr.net/npm/@ucloud-fe/react-components/dist/main.min.js',
             type: 'amd',
             dep: ['moment', 'react', 'react-dom']
         },

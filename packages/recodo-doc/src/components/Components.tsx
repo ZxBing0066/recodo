@@ -1,6 +1,6 @@
 import React, { ReactNode, useContext } from 'react';
 
-import { anchorCls, anchorIconCls } from './cls';
+import { anchorCls, anchorIconCls, headingCls } from './cls';
 import Code from './Code';
 import { GroupContext } from './Page';
 
@@ -27,6 +27,7 @@ export const Hn = ({ children, level, node }: { children: ReactNode; level: numb
             title = subName + '--' + title;
         }
         return React.createElement(Component, {
+            className: headingCls,
             children: (
                 <>
                     <a href={`#${title}`} id={title} className={anchorCls}>

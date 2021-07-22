@@ -163,13 +163,16 @@
     }
 }
 
-.recodo-anchor {
-    position: relative;
-    margin-right: -16px;
-    left: -20px;
-    .recodo-anchor-icon {
-        visibility: hidden;
-        vertical-align: middle;
+.recodo-heading {
+    .recodo-anchor {
+        position: relative;
+        margin-right: -20px;
+        left: -20px;
+        .recodo-anchor-icon {
+            visibility: hidden;
+            vertical-align: middle;
+            padding-right: 4px;
+        }
     }
     &:hover {
         .recodo-anchor-icon {
