@@ -1,5 +1,12 @@
 ## recodo-live
 
+React 实时预览编辑器
+
+-   支持 JSX
+-   支持 scope 注入
+-   支持 modules 注入
+-   代码错误捕获
+
 ### 安装
 
 依赖 recodo-compiler

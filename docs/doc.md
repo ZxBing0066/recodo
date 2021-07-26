@@ -1,5 +1,11 @@
 ## recodo-doc
 
+React 组件文档相关组件
+
+-   props 表格
+-   markdown 文档
+-   demo 实时演示
+
 ### 安装
 
 ```sh
