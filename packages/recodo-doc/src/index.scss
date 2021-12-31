@@ -75,6 +75,7 @@
         background: #ffffff;
         border: 1px solid #efeff8;
         padding: 24px;
+        overflow: auto;
 
         .recodo-props-table {
             width: 100%;
@@ -170,7 +171,6 @@
         left: -20px;
         .recodo-anchor-icon {
             visibility: hidden;
-            vertical-align: middle;
             padding-right: 4px;
         }
     }
