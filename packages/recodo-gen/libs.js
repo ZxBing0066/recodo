@@ -44,11 +44,16 @@ const updateHandle = (_path, scope) => {
     if (isComponent(relativePath)) {
         // 组件
         try {
-            const componentInfo = reactDocs.parse(fs.readFileSync(_path), null, null, {
-                filename: _path,
-                cwd: rootPath,
-                configFile: babelrc
-            });
+            const componentInfo = reactDocs.parse(
+                fs.readFileSync(_path),
+                reactDocs.resolver.findAllExportedComponentDefinitions,
+                null,
+                {
+                    filename: _path,
+                    cwd: rootPath,
+                    configFile: babelrc
+                }
+            );
             const componentName = componentInfo.displayName;
             const pre = _.find(example, info => {
                 return info.path === _path;
