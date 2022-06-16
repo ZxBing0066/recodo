@@ -41,6 +41,17 @@ const sharedOptions = {
         type: 'string',
         default: '^[^/\\\\]+(\\/|\\\\)[A-Z][A-Za-z_-]*.md(x)?$',
         describe: 'RegExp for match doc file'
+    },
+    resolver: {
+        alias: 'r',
+        type: 'string',
+        describe: 'Choose type of resolver',
+        choices: [
+            'findExportedComponentDefinition',
+            'findAllComponentDefinitions',
+            'findAllExportedComponentDefinitions'
+        ],
+        default: 'findExportedComponentDefinition'
     }
 };
 
@@ -68,6 +79,7 @@ yargs.command(
                 componentRegExp: new RegExp(argv.componentRegExp),
                 docRegExp: new RegExp(argv.docRegExp),
                 babelrc: argv.babelrc,
+                resolver: argv.resolver,
                 updateExamples,
                 updateDocs
             });
@@ -101,6 +113,7 @@ yargs.command(
                 componentRegExp: new RegExp(argv.componentRegExp),
                 docRegExp: new RegExp(argv.docRegExp),
                 babelrc: argv.babelrc,
+                resolver: argv.resolver,
                 updateExamples,
                 updateDocs
             });

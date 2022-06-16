@@ -38,7 +38,7 @@ const updateJSDOC = info => {
 };
 
 const updateHandle = (_path, scope) => {
-    const { isComponent, isDoc, rootPath, babelrc, updateExamples, updateDocs } = scope;
+    const { isComponent, isDoc, rootPath, babelrc, resolver, updateExamples, updateDocs } = scope;
     const { example, doc, relativePath } = prepare(_path, scope);
 
     if (isComponent(relativePath)) {
@@ -46,7 +46,7 @@ const updateHandle = (_path, scope) => {
         try {
             const componentInfo = reactDocs.parse(
                 fs.readFileSync(_path),
-                reactDocs.resolver.findAllExportedComponentDefinitions,
+                reactDocs.resolver[resolver],
                 null,
                 {
                     filename: _path,
@@ -54,19 +54,24 @@ const updateHandle = (_path, scope) => {
                     configFile: babelrc
                 }
             );
-            const componentName = componentInfo.displayName;
+            // 清理上次数据
             const pre = _.find(example, info => {
                 return info.path === _path;
             });
             if (pre && pre.name !== componentName) {
                 delete example[pre.name];
             }
-            updateJSDOC(componentInfo);
-            example[componentName] = {
-                path: relativePath,
-                name: componentName,
-                info: componentInfo
+            const isList = Array.isArray(componentInfo);
+            const writeComponentInfo = componentInfo => {
+                const componentName = componentInfo.displayName;
+                updateJSDOC(componentInfo);
+                example[componentName] = {
+                    path: relativePath,
+                    name: componentName,
+                    info: componentInfo
+                };
             };
+            isList ? componentInfo.forEach(writeComponentInfo) : writeComponentInfo(componentInfo);
             updateExamples(scope.examples);
         } catch (error) {
             if (error.message === 'No suitable component definition found.') {
