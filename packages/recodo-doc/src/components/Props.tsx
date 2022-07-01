@@ -68,9 +68,9 @@ const getTags = (description): { deprecated?: true; ignore?: true } => {
 };
 
 const Props = ({ name, subName }: { name: string; subName?: string }) => {
-    const { examples } = useContext(DocContext);
+    const { infoMap } = useContext(DocContext);
 
-    const info = examples?.[name]?.[subName || name]?.info;
+    const info = infoMap?.[name]?.[subName || name]?.info;
     const props = info?.props || {};
     const propKeys = Object.keys(props);
 

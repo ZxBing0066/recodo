@@ -127,7 +127,9 @@ export const RemoteEditor = ({ codeUrl, ...rest }: { codeUrl: string } & Omit<Ed
             try {
                 let raw = (await mod.import({ file: codeUrl, type: 'raw' })) as string;
                 let demoStartMatch = raw.match(/\/\/\s*demo\s*start\s*/);
-                let demoStartIndex = demoStartMatch ? demoStartMatch.index + demoStartMatch[0].length : undefined;
+                let demoStartIndex = demoStartMatch
+                    ? (demoStartMatch.index || 0) + demoStartMatch[0].length
+                    : undefined;
                 let demoEndMatch = raw.match(/\/\/\s*demo\s*end\s*/);
                 let demoEndIndex = demoEndMatch ? demoEndMatch.index : undefined;
                 raw = raw.slice(demoStartIndex, demoEndIndex) + '\nreturn <Demo />;';

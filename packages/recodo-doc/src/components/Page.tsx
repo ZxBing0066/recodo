@@ -9,11 +9,11 @@ import { DocContext } from './Provider';
 export const GroupContext = createContext({ name: '', subName: '' });
 
 const Page = ({ name, reportAnchorList }: { name: string; reportAnchorList?: (anchorList: any) => void }) => {
-    const { docs } = useContext(DocContext);
+    const { docMap } = useContext(DocContext);
 
-    const doc = docs?.[name];
+    const doc = docMap?.[name];
     const keys = Object.keys(doc || {});
-    const rootRef = useRef<HTMLDivElement>();
+    const rootRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (!rootRef.current) return;
@@ -22,7 +22,7 @@ const Page = ({ name, reportAnchorList }: { name: string; reportAnchorList?: (an
                 '.recodo-component-wrap>h2,.recodo-props>h3,.recodo-props>h4,.recodo-doc>h3,.recodo-doc>h4'
             )
         ];
-        const group = { children: [], level: 0 };
+        const group: { children: any[]; level: number } = { children: [], level: 0 };
         let pos = group;
         h.forEach(h => {
             const level = +h.tagName.replace(/^(H|h)/, '');

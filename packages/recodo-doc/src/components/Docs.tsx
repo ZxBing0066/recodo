@@ -7,8 +7,8 @@ import { CodeContext } from './Code';
 import { DocContext } from './Provider';
 
 const Docs = ({ name, subName }: { name: string; subName?: string }) => {
-    const { docs, components } = useContext(DocContext);
-    const docInfo = docs?.[name]?.[subName || name]?.info;
+    const { docMap, components } = useContext(DocContext);
+    const docInfo = docMap?.[name]?.[subName || name]?.info;
 
     return (
         <ErrorBoundary>

@@ -3,12 +3,12 @@ import React, { createContext, ReactNode, useEffect, useState } from 'react';
 import components from './Components';
 
 interface Content {
-    docs?: any;
-    examples?: any;
+    docMap?: any;
+    infoMap?: any;
     scope?: Record<string, any>;
     modules?: Record<string, any>;
     components?: any;
-    getRemoteUrl?: (codePath: string, componentName: string, subComponentName: string) => string;
+    getRemoteUrl?: (codePath: string, componentName?: string, subComponentName?: string) => string;
 }
 
 export const DocContext = createContext<Content>({});
@@ -18,11 +18,11 @@ interface ProviderProps {
     children: ReactNode;
     scope?: Record<string, any>;
     modules?: Record<string, any>;
-    getRemoteUrl?: (codePath: string, componentName: string, subComponentName: string) => string;
+    getRemoteUrl?: (codePath: string, componentName?: string, subComponentName?: string) => string;
 }
 
 const Provider = ({ content, children, scope, modules, getRemoteUrl }: ProviderProps) => {
-    const [_content, setContent] = useState<Content>(() => (typeof content === 'function' ? null : content));
+    const [_content, setContent] = useState<Content>(() => (typeof content === 'function' ? {} : content));
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(() => (typeof content === 'function' ? true : false));
 
