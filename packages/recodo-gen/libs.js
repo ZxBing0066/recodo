@@ -37,23 +37,30 @@ const updateJSDOC = info => {
     _.each(info.props, updateDescription);
 };
 
+const updateComponentInfo = (dirName, targetPath, component) => {
+    targetPath = path.join(targetPath, `${dirName}.info.json`);
+    fs.ensureFileSync(targetPath);
+    fs.outputFileSync(targetPath, JSON.stringify(component));
+};
+
+const updateComponentDoc = (dirName, targetPath, doc) => {
+    targetPath = path.join(targetPath, `${dirName}.doc.json`);
+    fs.ensureFileSync(targetPath);
+    fs.outputFileSync(targetPath, JSON.stringify(doc));
+};
+
 const updateHandle = (_path, scope) => {
-    const { isComponent, isDoc, rootPath, babelrc, resolver, updateExamples, updateDocs } = scope;
-    const { example, doc, relativePath } = prepare(_path, scope);
+    const { isComponent, isDoc, rootPath, babelrc, resolver, targetPath } = scope;
+    const { example, doc, relativePath, dirName } = prepare(_path, scope);
 
     if (isComponent(relativePath)) {
         // 组件
         try {
-            const componentInfo = reactDocs.parse(
-                fs.readFileSync(_path),
-                reactDocs.resolver[resolver],
-                null,
-                {
-                    filename: _path,
-                    cwd: rootPath,
-                    configFile: babelrc
-                }
-            );
+            const componentInfo = reactDocs.parse(fs.readFileSync(_path), reactDocs.resolver[resolver], null, {
+                filename: _path,
+                cwd: rootPath,
+                configFile: babelrc
+            });
             // 清理上次数据
             const pre = _.find(example, info => {
                 return info.path === _path;
@@ -72,7 +79,7 @@ const updateHandle = (_path, scope) => {
                 };
             };
             isList ? componentInfo.forEach(writeComponentInfo) : writeComponentInfo(componentInfo);
-            updateExamples(scope.examples);
+            updateComponentInfo(dirName, targetPath, example);
         } catch (error) {
             if (error.message === 'No suitable component definition found.') {
                 // console.error(`${_path} is not a valid component file, please check you glob expression`);
@@ -91,7 +98,7 @@ const updateHandle = (_path, scope) => {
             name: docName,
             info: docContent
         };
-        updateDocs(scope.docs);
+        updateComponentDoc(dirName, targetPath, doc);
     }
 };
 const cleanHandle = (_path, scope) => {

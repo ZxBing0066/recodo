@@ -51,7 +51,7 @@ const sharedOptions = {
             'findAllComponentDefinitions',
             'findAllExportedComponentDefinitions'
         ],
-        default: 'findExportedComponentDefinition'
+        default: 'findAllExportedComponentDefinitions'
     }
 };
 
@@ -65,23 +65,15 @@ yargs.command(
             fs.ensureDirSync(cachePath);
         };
 
-        const updateExamples = examples => {
-            fs.outputFileSync(path.join(cachePath, 'examples.json'), JSON.stringify(examples));
-        };
-        const updateDocs = docs => {
-            fs.outputFileSync(path.join(cachePath, 'docs.json'), JSON.stringify(docs));
-        };
-
         try {
             init();
             watch({
                 rootPath: argv.componentPath,
+                targetPath: argv.targetPath,
                 componentRegExp: new RegExp(argv.componentRegExp),
                 docRegExp: new RegExp(argv.docRegExp),
                 babelrc: argv.babelrc,
-                resolver: argv.resolver,
-                updateExamples,
-                updateDocs
+                resolver: argv.resolver
             });
         } catch (error) {
             console.error(error);
@@ -99,23 +91,15 @@ yargs.command(
             fs.ensureDirSync(cachePath);
         };
 
-        const updateExamples = examples => {
-            fs.outputFileSync(path.join(cachePath, 'examples.json'), JSON.stringify(examples));
-        };
-        const updateDocs = docs => {
-            fs.outputFileSync(path.join(cachePath, 'docs.json'), JSON.stringify(docs));
-        };
-
         try {
             init();
             build({
                 rootPath: argv.componentPath,
+                targetPath: argv.targetPath,
                 componentRegExp: new RegExp(argv.componentRegExp),
                 docRegExp: new RegExp(argv.docRegExp),
                 babelrc: argv.babelrc,
-                resolver: argv.resolver,
-                updateExamples,
-                updateDocs
+                resolver: argv.resolver
             });
         } catch (error) {
             console.error(error);
