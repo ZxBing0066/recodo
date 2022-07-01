@@ -1,6 +1,6 @@
 {
   "name": "recodo-gen",
-  "version": "0.0.8",
+  "version": "1.0.0",
   "description": "Generate docs from React Component comment and markdown files",
   "main": "index.js",
   "bin": {
