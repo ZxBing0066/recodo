@@ -2,9 +2,8 @@
 
 /* eslint-disable node/shebang */
 const yargs = require('yargs');
-const fs = require('fs-extra');
-const path = require('path');
 
+const { isComponent: _isComponent, isDoc: _isDoc } = require('./utils');
 const watch = require('./watch');
 const build = require('./build');
 
@@ -55,26 +54,32 @@ const sharedOptions = {
     }
 };
 
+const getScopeByOptions = ({ componentPath, targetPath, componentRegExp, docRegExp, babelrc, resolver }) => {
+    const isComponent = path => _isComponent(path, new RegExp(componentRegExp));
+    const isDoc = path => _isDoc(path, new RegExp(docRegExp));
+
+    const scope = {
+        // path of component directory
+        componentPath,
+        // path of target directory for put build file
+        targetPath,
+        // custom babel file
+        babelrc,
+        // custom resolver
+        resolver,
+        isComponent,
+        isDoc
+    };
+    return scope;
+};
+
 yargs.command(
     'watch',
     'Watch components change to update docs',
     yargs => yargs.options(sharedOptions),
     (argv = {}) => {
-        const cachePath = argv.targetPath;
-        const init = () => {
-            fs.ensureDirSync(cachePath);
-        };
-
         try {
-            init();
-            watch({
-                rootPath: argv.componentPath,
-                targetPath: argv.targetPath,
-                componentRegExp: new RegExp(argv.componentRegExp),
-                docRegExp: new RegExp(argv.docRegExp),
-                babelrc: argv.babelrc,
-                resolver: argv.resolver
-            });
+            watch(getScopeByOptions(argv));
         } catch (error) {
             console.error(error);
         }
@@ -86,21 +91,8 @@ yargs.command(
     'Build components docs',
     yargs => yargs.options(sharedOptions),
     (argv = {}) => {
-        const cachePath = argv.targetPath;
-        const init = () => {
-            fs.ensureDirSync(cachePath);
-        };
-
         try {
-            init();
-            build({
-                rootPath: argv.componentPath,
-                targetPath: argv.targetPath,
-                componentRegExp: new RegExp(argv.componentRegExp),
-                docRegExp: new RegExp(argv.docRegExp),
-                babelrc: argv.babelrc,
-                resolver: argv.resolver
-            });
+            build(getScopeByOptions(argv));
         } catch (error) {
             console.error(error);
         }
