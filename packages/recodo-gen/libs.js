@@ -44,12 +44,16 @@ const updateIndex = ({ targetPath }) => {
     const index = path.join(targetPath, 'index.js');
     let content = `const infoMap = {`;
     _.each(infoMap, (info, key) => {
-        content += `${key}: require('./${key}.info.json'),`;
+        if (Object.keys(info).length > 0) {
+            content += `${key}: require('./${key}.info.json'),`;
+        }
     });
     content += `};`;
     content += `const docMap = {`;
-    _.each(docMap, (info, key) => {
-        content += `${key}: require('./${key}.doc.json'),`;
+    _.each(docMap, (doc, key) => {
+        if (Object.keys(doc).length > 0) {
+            content += `${key}: require('./${key}.doc.json'),`;
+        }
     });
     content += `};`;
     content += `module.exports = { infoMap, docMap };`;
