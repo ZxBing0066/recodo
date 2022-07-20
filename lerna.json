@@ -1,6 +1,5 @@
 {
-  "packages": [
-    "packages/*"
-  ],
-  "version": "independent"
+    "packages": ["packages/*"],
+    "useNx": true,
+    "version": "independent"
 }

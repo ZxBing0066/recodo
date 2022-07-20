@@ -4,10 +4,8 @@
   "version": "0.0.2",
   "description": "Component docs system for React",
   "main": "index.js",
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "build:all": "npm run build:compiler:lib && npm run build:live:lib && npm run build:doc:lib && npm run build:compiler:dist && npm run build:live:dist && npm run build:doc:dist",
     "build:compiler:dist": "NODE_ENV=production webpack --config packages/recodo-compiler/webpack.config.js",
     "build:compiler:dist:analyzer": "ANALYZER=true npm run build:compiler:dist",
@@ -46,6 +44,7 @@
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.14.5",
     "@typescript-eslint/eslint-plugin": "^4.28.0",
+    "@typescript-eslint/parser": "^4.0.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.6",
@@ -55,7 +54,8 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "html-webpack-plugin": "^4",
-    "lerna": "^4.0.0",
+    "lerna": "^5.1.8",
+    "nx": "^14.4.3",
     "prettier": "^2.3.1",
     "sass": "^1.35.1",
     "sass-loader": "^10",
