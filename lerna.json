@@ -1,5 +1,13 @@
 {
     "packages": ["packages/*"],
     "useNx": true,
-    "version": "independent"
+    "version": "independent",
+    "command": {
+        "version": {
+            "conventionalCommits": true
+        },
+        "publish": {
+            "conventionalCommits": true
+        }
+    }
 }
