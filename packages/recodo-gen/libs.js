@@ -40,6 +40,10 @@ const updateJSDOC = info => {
     _.each(info.props, updateDescription);
 };
 
+const initial = scope => {
+    updateIndex(scope);
+};
+
 const updateIndex = ({ targetPath }) => {
     const index = path.join(targetPath, 'index.js');
     let content = `const infoMap = {`;
@@ -172,6 +176,7 @@ const cleanHandle = (_path, scope) => {
 };
 
 module.exports = {
+    initial,
     cleanHandle,
     updateHandle
 };

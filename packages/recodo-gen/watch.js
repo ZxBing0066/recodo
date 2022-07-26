@@ -1,6 +1,6 @@
 const chokidar = require('chokidar');
 
-const { updateHandle, cleanHandle } = require('./libs');
+const { updateHandle, cleanHandle, initial } = require('./libs');
 
 /**
  * 构建文档信息
@@ -13,6 +13,7 @@ const { updateHandle, cleanHandle } = require('./libs');
  * @param {function} scope.ready 初始化完成回调
  */
 module.exports = scope => {
+    initial(scope);
     chokidar
         .watch(scope.componentPath)
         .on('add', _path => updateHandle(_path, scope))

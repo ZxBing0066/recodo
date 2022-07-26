@@ -1,6 +1,6 @@
 const chokidar = require('chokidar');
 
-const { updateHandle } = require('./libs');
+const { updateHandle, initial } = require('./libs');
 const optionsToScope = require('./optionsToScope');
 
 /**
@@ -16,6 +16,7 @@ const optionsToScope = require('./optionsToScope');
 module.exports = scope => {
     return new Promise(resolve => {
         scope = optionsToScope(scope);
+        initial(scope);
         const watcher = chokidar
             .watch(scope.componentPath)
             .on('add', _path => updateHandle(_path, scope))
