@@ -3,7 +3,6 @@
 /* eslint-disable node/shebang */
 const yargs = require('yargs');
 
-const { isComponent: _isComponent, isDoc: _isDoc } = require('./utils');
 const watch = require('./watch');
 const build = require('./build');
 
@@ -54,32 +53,13 @@ const sharedOptions = {
     }
 };
 
-const getScopeByOptions = ({ componentPath, targetPath, componentRegExp, docRegExp, babelrc, resolver }) => {
-    const isComponent = path => _isComponent(path, new RegExp(componentRegExp));
-    const isDoc = path => _isDoc(path, new RegExp(docRegExp));
-
-    const scope = {
-        // path of component directory
-        componentPath,
-        // path of target directory for put build file
-        targetPath,
-        // custom babel file
-        babelrc,
-        // custom resolver
-        resolver,
-        isComponent,
-        isDoc
-    };
-    return scope;
-};
-
 yargs.command(
     'watch',
     'Watch components change to update docs',
     yargs => yargs.options(sharedOptions),
     (argv = {}) => {
         try {
-            watch(getScopeByOptions(argv));
+            watch(argv);
         } catch (error) {
             console.error(error);
         }
@@ -92,7 +72,7 @@ yargs.command(
     yargs => yargs.options(sharedOptions),
     (argv = {}) => {
         try {
-            build(getScopeByOptions(argv));
+            build(argv);
         } catch (error) {
             console.error(error);
         }
