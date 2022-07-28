@@ -5,7 +5,7 @@
     "maxMessageLength": 64,
     "minMessageLength": 3,
     "questions": ["type", "scope", "subject", "body", "breaking", "issues", "lerna"],
-    "scopes": ["gen", "compiler", "live", "doc", "recodo", "global"],
+    "scopes": ["gen", "compiler", "live", "doc", "recodo", "examples", "global"],
     "types": {
         "feat": {
             "description": "A new feature",
