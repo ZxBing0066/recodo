@@ -2,13 +2,18 @@
   "name": "recodo-compiler",
   "version": "0.1.5",
   "description": "Live editor and preview for React demo",
-  "main": "lib/index.js",
   "files": [
-    "lib/",
-    "dist/"
+    "cjs",
+    "esm",
+    "umd",
+    "index.d.ts"
   ],
+  "sideEffects": false,
+  "main": "cjs/index.cjs",
+  "module": "esm/index.js",
+  "types": "index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup -c rollup.config.js"
   },
   "repository": {
     "type": "git",
