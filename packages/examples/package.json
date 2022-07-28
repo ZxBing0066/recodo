@@ -1,0 +1,28 @@
+{
+  "name": "examples",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "recodo-compiler": "*",
+    "recodo-doc": "*",
+    "recodo-gen": "*",
+    "recodo-live": "*"
+  },
+  "devDependencies": {
+    "@originjs/vite-plugin-commonjs": "^1.0.3",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "@vitejs/plugin-react": "^2.0.0",
+    "typescript": "^4.6.4",
+    "vite": "^3.0.0",
+    "vite-plugin-commonjs": "^0.5.2"
+  }
+}
