@@ -9,7 +9,7 @@
     },
     "targetDefaults": {
         "build": {
-            "outputs": ["{projectRoot}/dist", "{projectRoot}/lib"]
+            "outputs": ["{projectRoot}/esm", "{projectRoot}/cjs", "{projectRoot}/umd", "{projectRoot}/types"]
         }
     }
 }

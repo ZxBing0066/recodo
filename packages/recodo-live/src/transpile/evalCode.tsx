@@ -1,8 +1,9 @@
 import React from 'react';
 
+import { Modules, Scope } from '../interface';
 import { _poly } from './transform';
 
-const evalCode = (code, scope, modules) => {
+const evalCode = (code: string, scope: Scope = {}, modules: Modules = {}) => {
     const scopeKeys = Object.keys(scope);
     const scopeValues = scopeKeys.map(key => scope[key]);
 
@@ -13,7 +14,7 @@ const evalCode = (code, scope, modules) => {
             ? 'moduleExports'
             : 'other';
 
-    const _require = name => {
+    const _require = (name: string) => {
         return modules[name];
     };
     const _exports = {};
@@ -23,13 +24,13 @@ const evalCode = (code, scope, modules) => {
         case 'exportsDefault': {
             const res = new Function('_poly', 'React', 'require', 'exports', 'module', ...scopeKeys, code);
             res(_poly, React, _require, _exports, _module, ...scopeValues);
-            const Component = _exports.default;
+            const Component = (_exports as { default: React.ComponentType }).default;
             return <Component />;
         }
         case 'moduleExports': {
             const res = new Function('_poly', 'React', 'require', 'exports', 'module', ...scopeKeys, code);
             res(_poly, React, _require, _exports, _module, ...scopeValues);
-            const Component = _module.exports;
+            const Component = _module.exports as React.ComponentType;
             return <Component />;
         }
         default: {

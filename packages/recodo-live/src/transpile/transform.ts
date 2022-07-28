@@ -11,4 +11,4 @@ const opts = {
     }
 };
 
-export default code => transform(code, opts).code;
+export default (code: string) => transform(code, opts).code;

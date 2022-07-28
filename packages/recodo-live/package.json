@@ -2,13 +2,18 @@
   "name": "recodo-live",
   "version": "0.1.4",
   "description": "Live editor and preview for React demo",
-  "main": "lib/index.js",
   "files": [
-    "lib/",
-    "dist/"
+    "cjs",
+    "esm",
+    "umd",
+    "types"
   ],
+  "sideEffects": false,
+  "main": "cjs/index.cjs",
+  "module": "esm/index.js",
+  "types": "./types/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc && rollup -c rollup.config.js"
   },
   "repository": {
     "type": "git",
@@ -22,13 +27,14 @@
   "homepage": "https://github.com/ZxBing0066/recodo#readme",
   "dependencies": {
     "prism-react-renderer": "^1.2.1",
-    "prop-types": "^15.7.2",
     "react-simple-code-editor": "^0.11.0"
   },
   "peerDependencies": {
-    "react": "^17 || ^16"
+    "react": "^18|| ^17 || ^16",
+    "react-dom": "^18|| ^17 || ^16"
   },
   "devDependencies": {
-    "react": "^16"
+    "react": "^18",
+    "recodo-compiler": "*"
   }
 }

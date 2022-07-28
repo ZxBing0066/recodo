@@ -4,7 +4,19 @@ import { Language, PrismTheme } from 'prism-react-renderer';
 import LiveContext from './LiveContext';
 import { generateElement, renderElementAsync } from '../../transpile';
 
-const transpile = ({ code, transformCode, scope, modules, noInline }) => {
+const transpile = ({
+    code,
+    transformCode,
+    scope,
+    modules,
+    noInline
+}: {
+    code: string;
+    transformCode?: (code: string) => string;
+    scope?: Record<string, any>;
+    modules?: Record<string, any>;
+    noInline?: boolean;
+}): [element: React.ComponentType | null, error: Error | null] => {
     let element = null;
     let error = null;
     const input = {
@@ -24,7 +36,7 @@ const transpile = ({ code, transformCode, scope, modules, noInline }) => {
         }
     } catch (err) {
         element = null;
-        error = err;
+        error = err as Error;
     }
     return [element, error];
 };
@@ -38,20 +50,22 @@ const LiveProvider = ({
     theme,
     transformCode,
     scope,
-    modules
+    modules,
+    onError
 }: {
     children: ReactNode;
     code: string;
-    language: Language;
-    disabled: boolean;
-    noInline: boolean;
-    theme: PrismTheme;
-    transformCode: (code: string) => string;
-    scope: Record<string, any>;
-    modules: Record<string, any>;
+    language?: Language;
+    disabled?: boolean;
+    noInline?: boolean;
+    theme?: PrismTheme;
+    transformCode?: (code: string) => string;
+    scope?: Record<string, any>;
+    modules?: Record<string, any>;
+    onError?: (error: Error) => void;
 }) => {
-    const [error, setError] = useState(null);
-    const [element, setElement] = useState(null);
+    const [error, setError] = useState<Error | null>(null);
+    const [element, setElement] = useState<React.ComponentType | null>(null);
     const [code, setCode] = useState(_code);
 
     const onChange = useCallback((code: string) => {
@@ -62,6 +76,7 @@ const LiveProvider = ({
         const [element, error] = transpile({ code, transformCode, scope, modules, noInline });
         setElement(() => element);
         setError(error);
+        error && onError?.(error);
     }, [code, transformCode, scope, modules]);
 
     return (

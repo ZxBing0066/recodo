@@ -105,3 +105,7 @@ dist
 
 packages/**/dist
 packages/**/lib
+packages/**/cjs
+packages/**/esm
+packages/**/types
+packages/**/umd

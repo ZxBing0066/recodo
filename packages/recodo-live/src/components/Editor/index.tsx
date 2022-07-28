@@ -24,7 +24,7 @@ const highlightCode = (code: string, theme: PrismTheme, language: Language) => (
 );
 
 export interface CodeEditorProps {
-    code: string;
+    code?: string;
     disabled?: boolean;
     language?: Language;
     onChange?: (code: string) => void;
@@ -33,7 +33,7 @@ export interface CodeEditorProps {
 }
 
 const CodeEditor = ({
-    code: _code,
+    code: _code = '',
     language = 'javascript',
     onChange = noop,
     style,
@@ -41,7 +41,7 @@ const CodeEditor = ({
     ...rest
 }: CodeEditorProps) => {
     const [code, setCode] = useState(_code);
-    const _highlightCode = useCallback(code => highlightCode(code, theme, language), [theme]);
+    const _highlightCode = useCallback((code: string) => highlightCode(code, theme, language), [theme]);
     const updateContent = useCallback((code: string) => {
         onChange(code);
         setCode(code);
