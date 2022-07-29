@@ -3,6 +3,7 @@ import Editor from 'react-simple-code-editor';
 import Highlight, { Language, Prism, PrismTheme } from 'prism-react-renderer';
 import nightOwl from 'prism-react-renderer/themes/nightOwl';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {};
 
 const highlightCode = (code: string, theme: PrismTheme, language: Language) => (
@@ -41,11 +42,14 @@ const CodeEditor = ({
     ...rest
 }: CodeEditorProps) => {
     const [code, setCode] = useState(_code);
-    const _highlightCode = useCallback((code: string) => highlightCode(code, theme, language), [theme]);
-    const updateContent = useCallback((code: string) => {
-        onChange(code);
-        setCode(code);
-    }, []);
+    const _highlightCode = useCallback((code: string) => highlightCode(code, theme, language), [language, theme]);
+    const updateContent = useCallback(
+        (code: string) => {
+            onChange(code);
+            setCode(code);
+        },
+        [onChange]
+    );
 
     return (
         <Editor

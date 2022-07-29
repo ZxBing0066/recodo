@@ -20,7 +20,6 @@ export const renderElementAsync = (
     { code = '', scope, modules }: { code: string; scope?: Scope; modules?: Modules },
     resultCallback: (result: any) => void,
     errorCallback: (err: Error) => void
-    // eslint-disable-next-line consistent-return
 ) => {
     const render = (element: React.ElementType) => {
         if (typeof element === 'undefined') {

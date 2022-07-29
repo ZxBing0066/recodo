@@ -77,7 +77,7 @@ const LiveProvider = ({
         setElement(() => element);
         setError(error);
         error && onError?.(error);
-    }, [code, transformCode, scope, modules]);
+    }, [code, transformCode, scope, modules, noInline, onError]);
 
     return (
         <LiveContext.Provider

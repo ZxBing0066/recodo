@@ -7,7 +7,7 @@ const evalCode = (code: string, scope: Scope = {}, modules: Modules = {}) => {
     const scopeKeys = Object.keys(scope);
     const scopeValues = scopeKeys.map(key => scope[key]);
 
-    let codeType =
+    const codeType =
         code.indexOf('exports.default') >= 0
             ? 'exportsDefault'
             : code.indexOf('module.exports') >= 0
@@ -19,7 +19,6 @@ const evalCode = (code: string, scope: Scope = {}, modules: Modules = {}) => {
     };
     const _exports = {};
     const _module = { exports: _exports };
-
     switch (codeType) {
         case 'exportsDefault': {
             const res = new Function('_poly', 'React', 'require', 'exports', 'module', ...scopeKeys, code);
@@ -34,9 +33,23 @@ const evalCode = (code: string, scope: Scope = {}, modules: Modules = {}) => {
             return <Component />;
         }
         default: {
-            code = `return (function() {${code}})();`;
-            const res = new Function('_poly', 'React', 'require', 'exports', 'module', ...scopeKeys, code);
-            return res(_poly, React, _require, _exports, _module, ...scopeValues);
+            let comp;
+            try {
+                // try is that a anonymous function or a jsx block
+                const _code = `return (${code.trim().replace(/;$/, '').replace(/^!/, '')})`;
+                const res = new Function('_poly', 'React', 'require', 'exports', 'module', ...scopeKeys, _code);
+                comp = res(_poly, React, _require, _exports, _module, ...scopeValues);
+            } catch (error) {
+                // format of manually return jsx block
+                const _code = `return (function() {${code}})();`;
+                const res = new Function('_poly', 'React', 'require', 'exports', 'module', ...scopeKeys, _code);
+                comp = res(_poly, React, _require, _exports, _module, ...scopeValues);
+            }
+            // when return a class component
+            if (comp.prototype instanceof React.Component) return React.createElement(comp);
+            if (typeof comp === 'function') return comp();
+
+            return comp;
         }
     }
 };
