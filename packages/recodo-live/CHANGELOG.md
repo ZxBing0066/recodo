@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2](https://github.com/ZxBing0066/recodo/compare/recodo-live@1.1.1...recodo-live@1.1.2) (2022-07-29)
+
+
+### Bug Fixes
+
+* **live:** 🐞 fix builds ([00a02c5](https://github.com/ZxBing0066/recodo/commit/00a02c5669fda6ac3b3cb3a91340b70441de22d3))
+
+
+
+
+
 ## [1.1.1](https://github.com/ZxBing0066/recodo/compare/recodo-live@1.1.0...recodo-live@1.1.1) (2022-07-29)
 
 
