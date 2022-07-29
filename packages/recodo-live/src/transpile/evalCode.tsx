@@ -45,9 +45,9 @@ const evalCode = (code: string, scope: Scope = {}, modules: Modules = {}) => {
                 const res = new Function('_poly', 'React', 'require', 'exports', 'module', ...scopeKeys, _code);
                 comp = res(_poly, React, _require, _exports, _module, ...scopeValues);
             }
-            // when return a class component
-            if (comp.prototype instanceof React.Component) return React.createElement(comp);
-            if (typeof comp === 'function') return comp();
+            // when return a class component or a function component
+            if (comp.prototype instanceof React.Component || typeof comp === 'function')
+                return React.createElement(comp);
 
             return comp;
         }
