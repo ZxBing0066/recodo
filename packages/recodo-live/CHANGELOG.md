@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/ZxBing0066/recodo/compare/recodo-live@1.1.0...recodo-live@1.1.1) (2022-07-29)
+
+
+### Bug Fixes
+
+* **live:** 🐞 fix function component render ([3b4e694](https://github.com/ZxBing0066/recodo/commit/3b4e69481dee8c029f9bd7fee822c0846e01e834))
+
+
+
+
+
 # [1.1.0](https://github.com/ZxBing0066/recodo/compare/recodo-live@1.0.0...recodo-live@1.1.0) (2022-07-29)
 
 
