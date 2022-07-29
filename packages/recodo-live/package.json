@@ -9,12 +9,11 @@
     "types"
   ],
   "sideEffects": false,
-  "main": "lib/index.cjs",
+  "main": "esm/index.cjs",
   "module": "esm/index.js",
   "types": "./types/index.d.ts",
   "scripts": {
-    "build": "tsc && rollup -c rollup.config.js",
-    "build:lib": "babel ./src/ --extensions '.js,.jsx,.ts,.tsx' -d ./lib/ --source-maps"
+    "build": "tsc && rollup -c rollup.config.js"
   },
   "repository": {
     "type": "git",
