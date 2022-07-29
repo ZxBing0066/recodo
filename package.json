@@ -1,7 +1,6 @@
 {
   "private": "true",
   "name": "recodo",
-  "version": "0.0.2",
   "description": "Component docs system for React",
   "main": "index.js",
   "scripts": {
