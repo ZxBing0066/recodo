@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/ZxBing0066/recodo/compare/recodo-live@1.1.2...recodo-live@1.2.0) (2022-08-03)
+
+
+### Features
+
+* **live:** ✨ add wait for debounce code change ([bbc22f5](https://github.com/ZxBing0066/recodo/commit/bbc22f51b81b91cdfa114bad82ef68ba245ef28f))
+* **live:** ✨ optimize jsx block & anonymous function compiler ([42cd7d3](https://github.com/ZxBing0066/recodo/commit/42cd7d3af6b032c311c8a00c83d7d66e764058dd))
+
+
+
+
+
 ## [1.1.2](https://github.com/ZxBing0066/recodo/compare/recodo-live@1.1.1...recodo-live@1.1.2) (2022-07-29)
 
 

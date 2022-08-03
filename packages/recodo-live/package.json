@@ -1,6 +1,6 @@
 {
   "name": "recodo-live",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Live editor and preview for React demo",
   "files": [
     "cjs",
