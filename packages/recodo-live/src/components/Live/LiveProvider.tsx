@@ -1,4 +1,4 @@
-import React, { ReactNode, useCallback, useEffect, useState } from 'react';
+import React, { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import { Language, PrismTheme } from 'prism-react-renderer';
 
 import LiveContext from './LiveContext';
@@ -41,6 +41,19 @@ const transpile = ({
     return [element, error];
 };
 
+const debounce = <T extends (...args: any[]) => any>(fn: T, delay = 100) => {
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    return ((...args: any[]) => {
+        if (timer) {
+            clearTimeout(timer);
+        }
+        timer = setTimeout(() => {
+            timer = null;
+            fn(...args);
+        }, delay);
+    }) as T;
+};
+
 const LiveProvider = ({
     children,
     code: _code = '',
@@ -51,7 +64,8 @@ const LiveProvider = ({
     transformCode,
     scope,
     modules,
-    onError
+    onError,
+    wait = 500
 }: {
     children: ReactNode;
     code: string;
@@ -63,14 +77,19 @@ const LiveProvider = ({
     scope?: Record<string, any>;
     modules?: Record<string, any>;
     onError?: (error: Error) => void;
+    wait?: number;
 }) => {
     const [error, setError] = useState<Error | null>(null);
     const [element, setElement] = useState<React.ComponentType | null>(null);
     const [code, setCode] = useState(_code);
 
-    const onChange = useCallback((code: string) => {
-        setCode(code);
-    }, []);
+    const onChange = useMemo(
+        () =>
+            debounce((code: string) => {
+                setCode(code);
+            }, wait),
+        [wait]
+    );
 
     useEffect(() => {
         const [element, error] = transpile({ code, transformCode, scope, modules, noInline });
