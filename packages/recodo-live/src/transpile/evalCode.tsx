@@ -98,7 +98,6 @@ const evalCode = (code: string, scope: Scope = {}, modules: Modules = {}) => {
                 //
             }
             _code = codeRef.v;
-            console.log(code, _code);
             // return jsx or a anonymous function
             if (_code.startsWith('React.createElement(') || isSingleAnonymousFunction(_code)) {
                 _code = `return (${codeRef.v.replace(/^!function/, 'function')})`;
