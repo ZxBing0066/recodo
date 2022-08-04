@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://github.com/ZxBing0066/recodo/compare/recodo-gen@1.2.1...recodo-gen@1.2.2) (2022-08-04)
+
+
+### Bug Fixes
+
+* **gen:** 🐞 fix options missing prop ([5a6f44f](https://github.com/ZxBing0066/recodo/commit/5a6f44f164ee681cddeeb0d9857f49b996823c5a))
+
+
+
+
+
 ## [1.2.1](https://github.com/ZxBing0066/recodo/compare/recodo-gen@1.2.0...recodo-gen@1.2.1) (2022-08-04)
 
 
