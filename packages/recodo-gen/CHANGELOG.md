@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://github.com/ZxBing0066/recodo/compare/recodo-gen@1.2.0...recodo-gen@1.2.1) (2022-08-04)
+
+
+### Bug Fixes
+
+* **gen:** 🐞 fix watch ([d67b6b6](https://github.com/ZxBing0066/recodo/commit/d67b6b6bc3a8c3b62fb3700b90f145ce75b73def))
+
+
+
+
+
 # [1.2.0](https://github.com/ZxBing0066/recodo/compare/recodo-gen@1.1.0...recodo-gen@1.2.0) (2022-07-26)
 
 
