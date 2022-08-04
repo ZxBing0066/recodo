@@ -22,8 +22,8 @@ export default class ImportDeclaration extends Node {
         }
         if (importSpecifiers.length) {
             importSpecifiers.map(({ imported, local }) => {
-                imported === local ? imported : `${imported}: ${local}`;
-                replaceCode += `\vvar ${imported} = require('${sourceName}').${local};`;
+                // imported === local ? imported : `${imported}: ${local}`;
+                replaceCode += `\vvar ${local} = require('${sourceName}').${imported};`;
             });
         }
         code.overwrite(start, end, replaceCode);
