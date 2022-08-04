@@ -1,6 +1,7 @@
 const chokidar = require('chokidar');
 
 const { updateHandle, cleanHandle, initial } = require('./libs');
+const optionsToScope = require('./optionsToScope');
 
 /**
  * 构建文档信息
@@ -13,6 +14,7 @@ const { updateHandle, cleanHandle, initial } = require('./libs');
  * @param {function} scope.ready 初始化完成回调
  */
 module.exports = scope => {
+    scope = optionsToScope(scope);
     initial(scope);
     chokidar
         .watch(scope.componentPath)
