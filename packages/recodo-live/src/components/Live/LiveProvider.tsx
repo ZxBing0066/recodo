@@ -2,20 +2,18 @@ import React, { ReactNode, useEffect, useMemo, useState } from 'react';
 import { Language, PrismTheme } from 'prism-react-renderer';
 
 import LiveContext from './LiveContext';
-import { generateElement, renderElementAsync } from '../../transpile';
+import { generateElement } from '../../transpile';
 
 const transpile = ({
     code,
     transformCode,
     scope,
-    modules,
-    noInline
+    modules
 }: {
     code: string;
     transformCode?: (code: string) => string;
     scope?: Record<string, any>;
     modules?: Record<string, any>;
-    noInline?: boolean;
 }): [element: React.ComponentType | null, error: Error | null] => {
     let element = null;
     let error = null;
@@ -25,15 +23,15 @@ const transpile = ({
         modules
     };
     try {
-        if (noInline) {
-            renderElementAsync(
-                input,
-                ele => (element = ele),
-                err => (error = err)
-            );
-        } else {
-            element = generateElement(input, err => (error = err));
-        }
+        // if (noInline) {
+        //     renderElementAsync(
+        //         input,
+        //         ele => (element = ele),
+        //         err => (error = err)
+        //     );
+        // } else {
+        element = generateElement(input, err => (error = err));
+        // }
     } catch (err) {
         element = null;
         error = err as Error;
@@ -59,7 +57,6 @@ const LiveProvider = ({
     code: _code = '',
     language = 'jsx',
     disabled,
-    noInline,
     theme,
     transformCode,
     scope,
@@ -67,16 +64,25 @@ const LiveProvider = ({
     onError,
     wait = 500
 }: {
+    /** LiveEditor, LivePreview, LiveError... */
     children: ReactNode;
+    /** default code */
     code: string;
+    /** code language */
     language?: Language;
+    /** disabled editor */
     disabled?: boolean;
-    noInline?: boolean;
+    /** prism theme for editor */
     theme?: PrismTheme;
+    /** transform code before compile */
     transformCode?: (code: string) => string;
+    /** code exec context */
     scope?: Record<string, any>;
+    /** modules support in import or require */
     modules?: Record<string, any>;
+    /** error callback */
     onError?: (error: Error) => void;
+    /** debounce wait duration to exec code, for better performance or reduce flash */
     wait?: number;
 }) => {
     const [error, setError] = useState<Error | null>(null);
@@ -92,11 +98,11 @@ const LiveProvider = ({
     );
 
     useEffect(() => {
-        const [element, error] = transpile({ code, transformCode, scope, modules, noInline });
+        const [element, error] = transpile({ code, transformCode, scope, modules });
         setElement(() => element);
         setError(error);
         error && onError?.(error);
-    }, [code, transformCode, scope, modules, noInline, onError]);
+    }, [code, transformCode, scope, modules, onError]);
 
     return (
         <LiveContext.Provider

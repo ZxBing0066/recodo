@@ -20,7 +20,26 @@ const cleanPreComment = (codeRef: { v: string }) => {
     return cleanMultipleLineComment(codeRef) || cleanSingleLineComment(codeRef);
 };
 
+const isJsxBlock = (code: string) => {
+    code = code.trim();
+    const codeRef = { v: code };
+    // clean comment
+    while (cleanPreComment(codeRef)) {
+        //
+    }
+    code = codeRef.v;
+    return code.startsWith('<') ? code : false;
+};
+
 const isSingleAnonymousFunction = (code: string) => {
+    code = code.trim().replace(/;$/, '');
+    const codeRef = { v: code };
+    // clean comment
+    while (cleanPreComment(codeRef)) {
+        //
+    }
+    code = codeRef.v;
+
     if (!code.startsWith('!function') || !code.endsWith('}')) return false;
     const stack: string[] = [];
     const quoteMap: Record<string, 1> = { '"': 1, "'": 1, '`': 1 };
@@ -45,7 +64,7 @@ const isSingleAnonymousFunction = (code: string) => {
                 }
             } else if (s === '}') {
                 if (!firstBeginAngleBracket) return false;
-                if (stack.length === 0 && i === l - 1) return true;
+                if (stack.length === 0 && i === l - 1) return code;
                 if (latestSymbol === '{') {
                     stack.pop();
                     continue;
@@ -56,7 +75,7 @@ const isSingleAnonymousFunction = (code: string) => {
     }
 };
 
-const evalCode = (code: string, scope: Scope = {}, modules: Modules = {}) => {
+const evalCode = (code: string, scope: Scope = {}, modules: Modules = {}, sourceCode: string) => {
     const scopeKeys = Object.keys(scope);
     const scopeValues = scopeKeys.map(key => scope[key]);
 
@@ -89,29 +108,16 @@ const evalCode = (code: string, scope: Scope = {}, modules: Modules = {}) => {
         }
         default: {
             if (!code) return null;
-
-            // trim and clean latest ;
-            let _code = code.trim().replace(/;$/, '');
-            const codeRef = { v: _code };
-            // clean comment
-            while (cleanPreComment(codeRef)) {
-                //
-            }
-            _code = codeRef.v;
             // return jsx or a anonymous function
-            if (_code.startsWith('React.createElement(') || isSingleAnonymousFunction(_code)) {
-                _code = `return (${codeRef.v.replace(/^!function/, 'function')})`;
+            let _code = isJsxBlock(sourceCode) ? code : isSingleAnonymousFunction(code);
+            if (_code) {
+                _code = `return (${_code.replace(/^!function/, 'function')})`;
             } else {
                 // format of manually return jsx block
                 _code = `return (function() {${code}})();`;
             }
             const res = new Function('_poly', 'React', 'require', 'exports', 'module', ...scopeKeys, _code);
             const comp = res(_poly, React, _require, _exports, _module, ...scopeValues);
-            if (!comp) return null;
-            // when return a class component or a function component
-            if (comp.prototype instanceof React.Component || typeof comp === 'function') {
-                return React.createElement(comp);
-            }
 
             return comp;
         }
