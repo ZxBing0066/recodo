@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.2](https://github.com/ZxBing0066/recodo/compare/recodo-compiler@1.0.1...recodo-compiler@1.0.2) (2022-08-04)
+
+
+### Bug Fixes
+
+* **compiler:** 🐞 fix compiler import & local ([16f22d9](https://github.com/ZxBing0066/recodo/commit/16f22d927d31ebc0dad2382b8e40149b466a6f6e))
+
+
+
+
+
 ## [1.0.1](https://github.com/ZxBing0066/recodo/compare/recodo-compiler@1.0.0...recodo-compiler@1.0.1) (2022-08-04)
 
 
