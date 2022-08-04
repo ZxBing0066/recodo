@@ -13,7 +13,7 @@ export const generateElement = (
     const codeTrimmed = code.trim().replace(/;$/, '');
 
     // NOTE: Workaround for classes and arrow functions.
-    return errorBoundary(evalCode(transform(codeTrimmed), scope, modules), errorCallback);
+    return errorBoundary(evalCode(transform(codeTrimmed), scope, modules, code), errorCallback);
 };
 
 export const renderElementAsync = (
@@ -33,5 +33,5 @@ export const renderElementAsync = (
         return errorCallback(new SyntaxError('No-Inline evaluations must call `render`.'));
     }
 
-    evalCode(transform(code), { ...scope, render }, modules);
+    evalCode(transform(code), { ...scope, render }, modules, code);
 };
