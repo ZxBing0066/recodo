@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1](https://github.com/ZxBing0066/recodo/compare/recodo-compiler@1.0.0...recodo-compiler@1.0.1) (2022-08-04)
+
+
+### Bug Fixes
+
+* **compiler:** 🐞 clone options to aviod rollup compile bug ([9d39086](https://github.com/ZxBing0066/recodo/commit/9d39086f0731d38ee739377c1e73531b3bf2fd70))
+
+
+
+
+
 # [1.0.0](https://github.com/ZxBing0066/recodo/compare/recodo-compiler@0.1.5...recodo-compiler@1.0.0) (2022-07-28)
 
 

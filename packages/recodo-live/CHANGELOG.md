@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/ZxBing0066/recodo/compare/recodo-live@1.2.1...recodo-live@1.3.0) (2022-08-04)
+
+
+### Features
+
+* **examples:** ✨ fill examples ([d6dc1f0](https://github.com/ZxBing0066/recodo/commit/d6dc1f074740d95c02098cf654742b83aca1bc2e))
+* **live:** ✨ optimize evalCode ([9f4db9b](https://github.com/ZxBing0066/recodo/commit/9f4db9bf67d9bfc4de9cb5265fff94bb4e5068b0))
+
+
+
+
+
 ## [1.2.1](https://github.com/ZxBing0066/recodo/compare/recodo-live@1.2.0...recodo-live@1.2.1) (2022-08-03)
 
 **Note:** Version bump only for package recodo-live
