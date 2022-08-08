@@ -45,10 +45,11 @@ export function target(target) {
     return transforms;
 }
 
-export function transform(source, options) {
+export function transform(source, options = {}) {
     let ast;
     let jsx = null;
-    options = { ...options };
+    // clone to avoid side effects of modifying the original options object
+    options = JSON.parse(JSON.stringify(options));
 
     try {
         ast = parser.parse(source, {
