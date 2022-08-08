@@ -20,7 +20,7 @@
     "start:docsify": "docsify serve docs",
     "dev": "npm run build:compiler:lib -- --watch & npm run build:live:lib -- --watch & npm run dev:doc",
     "prepare": "husky install",
-    "publish": "lerna publish -m \"chore(global): 🎸 publish\""
+    "publish": "lerna publish -m \"chore(global): 🎸 publish\" --conventional-commits --no-private"
   },
   "repository": {
     "type": "git",
