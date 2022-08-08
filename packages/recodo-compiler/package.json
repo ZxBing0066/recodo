@@ -1,6 +1,6 @@
 {
   "name": "recodo-compiler",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Live editor and preview for React demo",
   "files": [
     "cjs",

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.3](https://github.com/ZxBing0066/recodo/compare/recodo-compiler@1.0.2...recodo-compiler@1.0.3) (2022-08-08)
+
+
+### Bug Fixes
+
+* **compiler:** 🐞 fix options midified bug ([b39b360](https://github.com/ZxBing0066/recodo/commit/b39b360d28d558ebaf3ee4c28f9157e8d6c6211f))
+
+
+
+
+
 ## [1.0.2](https://github.com/ZxBing0066/recodo/compare/recodo-compiler@1.0.1...recodo-compiler@1.0.2) (2022-08-04)
 
 
